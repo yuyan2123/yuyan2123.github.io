@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Henry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="about">
+<div class="bg-fx"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+
+<div id="site-nav"></div>
+
+<!-- ===== 頁首 + 照片 ===== -->
+<section class="wrap about-hero">
+  <div class="photo" data-reveal>
+    <div class="avatar-wrap">
+      <!-- ↓ 替換：整段換成 <img class="avatar" src="assets/img/me.jpg" alt=""> ↓ -->
+      <div class="avatar">
+        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="36" r="17" fill="#f5a623" opacity=".5"/><path d="M20 92c0-18 13-29 30-29s30 11 30 29" fill="#f5a623" opacity=".5"/></svg>
+      </div>
+    </div>
+  </div>
+  <div data-reveal>
+    <span class="eyebrow">About me</span>
+    <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(38px,6vw,68px);letter-spacing:-.03em;line-height:1.04;margin:14px 0 10px"><span data-en="Hi, I'm" data-zh="嗨，我是">Hi, I'm</span> <span class="grad" data-bind="name">Henry</span></h1>
+    <p class="role" style="font-family:var(--display);font-weight:600;font-size:clamp(20px,3vw,26px)" data-bind="role">Backend / Full-stack Engineer</p>
+    <p style="color:var(--muted);font-size:18px;margin-top:16px;max-width:44ch" data-bind="tagline">I turn complex systems into clean, maintainable building blocks.</p>
+    <div class="hero-btns" style="margin-top:26px">
+      <a class="btn btn-primary" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
+      <a class="btn btn-ghost" href="index.html#contact" data-en="Contact me →" data-zh="聯絡我 →">Contact me →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 我的故事 ===== -->
+<section class="wrap" style="padding-top:64px;padding-bottom:20px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">My story</span>
+    <h2 data-en="My story" data-zh="我的故事">My story</h2>
+  </div>
+  <div data-reveal>
+    <div class="prose" data-block="en">
+      <p class="lead-line">For me, the most fascinating part of programming isn't making things work — it's making them easy to understand, easy to change, and able to live for a long time.</p>
+      <p>Ever since I wrote my first line of C in university, I've been drawn to the feeling of turning chaos into order with logic. After my CS degree I joined a startup first, doing a bit of everything — backend APIs, databases, deploy scripts — which forced me to grasp the whole development workflow quickly.</p>
+      <p>Later I moved to a mid-sized company and owned the backend of a core payments system. What I learned there went far beyond technology: when a service handles a large volume of transactions every day, any careless decision becomes someone's overtime six months later. So I started taking testing, documentation and observability seriously, and built the habit of writing technical notes.</p>
+      <p>These days I focus on backend and distributed systems, enjoy digging into low-level internals, and run self-hosted experiments that don't rely on the big cloud vendors. Outside work, I turn what I learn into articles — because explaining something clearly is how I know I truly understand it.</p>
+    </div>
+    <div class="prose" data-block="zh" hidden>
+      <p class="lead-line">寫程式對我來說，最迷人的不是讓東西「能動」，而是讓它「好懂、好改、好活很久」。</p>
+      <p>我從大學接觸第一行 C 語言開始，就被那種「用邏輯把混亂收進秩序」的感覺吸引。資工系畢業後先進了一間新創，什麼都做——從後端 API、資料庫到部署腳本，逼著自己在很短的時間內補齊整個開發流程的全貌。</p>
+      <p>後來轉到一間中型企業，負責核心金流系統的後端。那段時間我學到的，遠不只是技術：當一個服務每天要處理大量交易，任何一個草率的決定，半年後都會變成別人加班的理由。於是我開始認真看待測試、文件、可觀測性，也養成了寫技術筆記的習慣。</p>
+      <p>現在的我，專注在後端與分散式系統，喜歡研究底層原理、做一些不靠雲端大廠的自架實驗。工作之外，我會把學到的東西整理成文章分享出去，因為我相信：把一件事講清楚，自己才算真的懂了。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 經歷時間軸 ===== -->
+<section class="wrap" style="padding-top:46px;padding-bottom:20px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">Experience</span>
+    <h2 data-en="Experience" data-zh="經歷">Experience</h2>
+  </div>
+  <div class="timeline" data-reveal>
+    <div class="tl-item">
+      <div class="when" data-en="2024 — Present" data-zh="2024 — 至今">2024 — Present</div>
+      <h3 data-en="Senior Backend Engineer" data-zh="資深後端工程師">Senior Backend Engineer</h3>
+      <div class="where" data-en="A mid-sized tech company · Taipei" data-zh="某中型科技公司 · 台北">A mid-sized tech company · Taipei</div>
+      <p data-en="Own the backend architecture and performance of a core transaction system; introduced gRPC microservices and an observability platform, cutting peak latency by ~40%." data-zh="負責核心交易系統的後端架構與效能優化，導入 gRPC 微服務與可觀測性平台，將尖峰延遲降低約 40%。">Own the backend architecture and performance of a core transaction system; introduced gRPC microservices and an observability platform, cutting peak latency by ~40%.</p>
+    </div>
+    <div class="tl-item">
+      <div class="when" data-en="2021 — 2024" data-zh="2021 — 2024">2021 — 2024</div>
+      <h3 data-en="Full-stack Engineer" data-zh="全端工程師">Full-stack Engineer</h3>
+      <div class="where" data-en="An early-stage startup · Taipei" data-zh="某早期新創 · 台北">An early-stage startup · Taipei</div>
+      <p data-en="Built the backend and part of the frontend from scratch, set up CI/CD and containerized deploys, and grew the product from 0 to 10k users." data-zh="從零打造產品的後端與部分前端，建立 CI/CD 流程與容器化部署，陪伴產品從 0 到 1 萬名使用者。">Built the backend and part of the frontend from scratch, set up CI/CD and containerized deploys, and grew the product from 0 to 10k users.</p>
+    </div>
+    <div class="tl-item">
+      <div class="when" data-en="2021" data-zh="2021">2021</div>
+      <h3 data-en="B.S. in Computer Science" data-zh="資訊工程學系 學士">B.S. in Computer Science</h3>
+      <div class="where" data-en="A national university" data-zh="某國立大學">A national university</div>
+      <p data-en="Majored in systems and networking; capstone on distributed storage earned a department award." data-zh="主修系統與網路，畢業專題以分散式儲存為題，獲系上優良專題。">Majored in systems and networking; capstone on distributed storage earned a department award.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 價值觀 ===== -->
+<section class="wrap" style="padding-top:46px;padding-bottom:20px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">How I work</span>
+    <h2 data-en="What I believe" data-zh="我相信的事">What I believe</h2>
+  </div>
+  <div class="values">
+    <article class="vcard spot" data-reveal>
+      <div class="vn">01</div>
+      <h3 data-en="Write for the next person" data-zh="為下一個人而寫">Write for the next person</h3>
+      <p data-en="Nine out of ten readers of your code are future maintainers — including you in three months. Readability first." data-zh="程式碼的讀者，九成是未來的維護者，包括三個月後的自己。可讀性優先。">Nine out of ten readers of your code are future maintainers — including you in three months. Readability first.</p>
+    </article>
+    <article class="vcard spot" data-reveal>
+      <div class="vn">02</div>
+      <h3 data-en="Simple before clever" data-zh="先簡單，再聰明">Simple before clever</h3>
+      <p data-en="If one function solves it, don't reach for a framework first. Spend complexity where it counts." data-zh="能用一個函式解決的，就不要先上框架。複雜度要花在刀口上。">If one function solves it, don't reach for a framework first. Spend complexity where it counts.</p>
+    </article>
+    <article class="vcard spot" data-reveal>
+      <div class="vn">03</div>
+      <h3 data-en="You can't manage what you can't see" data-zh="看得見才管得了">You can't manage what you can't see</h3>
+      <p data-en="Monitoring, logs and tests aren't overhead — they're the insurance that lets you sleep at night." data-zh="監控、日誌、測試不是負擔，而是讓你半夜能安心睡覺的保險。">Monitoring, logs and tests aren't overhead — they're the insurance that lets you sleep at night.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 螢幕之外 ===== -->
+<section class="wrap" style="padding-top:46px;padding-bottom:70px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">Off screen</span>
+    <h2 data-en="Off screen" data-zh="螢幕之外">Off screen</h2>
+  </div>
+  <div class="bento" data-reveal>
+    <article class="cell c-side half spot">
+      <span class="en" data-en="Reading" data-zh="在讀">Reading</span>
+      <h3 data-en="Recent books" data-zh="最近的書">Recent books</h3>
+      <ul>
+        <li><span class="mn">›</span> Designing Data-Intensive Apps</li>
+        <li><span class="mn">›</span> The Pragmatic Programmer</li>
+      </ul>
+    </article>
+    <article class="cell c-side half spot">
+      <span class="en" data-en="Hobbies" data-zh="興趣">Hobbies</span>
+      <h3 data-en="When I'm not coding" data-zh="不寫程式的時候">When I'm not coding</h3>
+      <ul>
+        <li><span class="mn">›</span> <span data-en="Hand-brew coffee and roasting" data-zh="手沖咖啡與烘豆">Hand-brew coffee and roasting</span></li>
+        <li><span class="mn">›</span> <span data-en="Tinkering with my homelab" data-zh="整理 homelab 與自架服務">Tinkering with my homelab</span></li>
+        <li><span class="mn">›</span> <span data-en="Hiking and watching ball games" data-zh="爬山與看球">Hiking and watching ball games</span></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

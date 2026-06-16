@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henry — Software Engineer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+<div class="bg-fx"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+
+<div id="site-nav"></div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="status"><span class="pulse"></span><span data-bind="status">Open to work</span></span>
+      <h1><span data-en="Hi, I'm" data-zh="嗨，我是">Hi, I'm</span><br><span class="grad" data-bind="name">Henry</span></h1>
+      <p class="role" data-bind="role">Backend / Full-stack Engineer</p>
+      <p class="tag" data-bind="tagline">I turn complex systems into clean, maintainable building blocks.</p>
+      <div class="hero-btns">
+        <a href="projects.html" class="btn btn-primary" data-en="View my work →" data-zh="看我的專案 →">View my work →</a>
+        <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
+      </div>
+      <div class="socials">
+        <a href="#" data-href="github" title="GitHub" target="_blank" rel="noopener">GH</a>
+        <a href="#" data-href="linkedin" title="LinkedIn" target="_blank" rel="noopener">in</a>
+        <a href="#contact" title="Email">@</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="avatar-wrap">
+        <!-- ↓ 替換：整段換成 <img class="avatar" src="assets/img/me.jpg" alt=""> ↓ -->
+        <div class="avatar">
+          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="36" r="17" fill="#f5a623" opacity=".5"/><path d="M20 92c0-18 13-29 30-29s30 11 30 29" fill="#f5a623" opacity=".5"/></svg>
+        </div>
+        <span class="float f1"><span class="mn">{ }</span> <span data-en="Open-source fan" data-zh="開源愛好者">Open-source fan</span></span>
+        <span class="float f2"><span class="mn">›_</span> <span data-en="Powered by coffee" data-zh="咖啡因驅動">Powered by coffee</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="marquee" id="marquee"></div></div>
+</header>
+
+<!-- ===== ABOUT 摘要 ===== -->
+<section class="wrap" id="about-teaser" style="padding-top:86px;padding-bottom:86px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">About</span>
+    <h2 data-en="A bit about me" data-zh="關於我">A bit about me</h2>
+    <p data-en="More than writing code — I care about the trade-offs behind every decision." data-zh="不只是會寫程式，更在意每個決定背後的取捨。">More than writing code — I care about the trade-offs behind every decision.</p>
+  </div>
+  <div class="bento">
+    <article class="cell c-bio spot" data-reveal style="grid-row:auto">
+      <span class="en" data-en="Biography" data-zh="自傳">Biography</span>
+      <p class="big" data-en="I'm a software engineer based in Taipei, passionate about backend and distributed systems." data-zh="我是一位來自台北的軟體工程師，熱衷於後端與分散式系統的設計。">I'm a software engineer based in Taipei, passionate about backend and distributed systems.</p>
+      <p data-en="After a CS degree I went into backend development at both startups and mid-sized companies. I believe good code is written for the next person who maintains it — readability, tests and docs first." data-zh="資工系畢業後投入後端開發，待過新創與中型企業。我相信好的程式碼是寫給「下一個維護的人」看的，重視可讀性、測試與文件。">After a CS degree I went into backend development at both startups and mid-sized companies. I believe good code is written for the next person who maintains it — readability, tests and docs first.</p>
+      <div class="more"><a class="btn btn-ghost" href="about.html" data-en="Read full bio →" data-zh="完整自我介紹 →">Read full bio →</a></div>
+    </article>
+    <article class="cell c-side spot" data-reveal>
+      <span class="en" data-en="Currently" data-zh="近況">Currently</span>
+      <h3 data-en="What I'm doing" data-zh="正在做的事">What I'm doing</h3>
+      <ul>
+        <li><span class="mn">›</span> <span data-en="Exploring Rust's async runtime" data-zh="研究 Rust 的非同步執行期">Exploring Rust's async runtime</span></li>
+        <li><span class="mn">›</span> <span data-en="Rewriting my homelab monitoring" data-zh="重寫個人 homelab 的監控">Rewriting my homelab monitoring</span></li>
+        <li><span class="mn">›</span> <span data-en="Reading Designing Data-Intensive Apps" data-zh="讀《Designing Data-Intensive Apps》">Reading Designing Data-Intensive Apps</span></li>
+      </ul>
+    </article>
+    <div id="stats" style="display:contents"></div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="wrap" id="skills-sec" style="padding:0 26px 86px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">Skills</span>
+    <h2 data-en="Tech stack" data-zh="技術棧">Tech stack</h2>
+    <p data-en="Grouped by area. Filled chips are core skills; outlined ones I'm comfortable ramping up on." data-zh="依領域分組，實心代表核心技能、外框代表熟悉並能上手。">Grouped by area. Filled chips are core skills; outlined ones I'm comfortable ramping up on.</p>
+  </div>
+  <div class="skill-bento" id="skills" data-reveal></div>
+  <div class="skill-note">
+    <span><span class="dotc"></span><span data-en="Core — daily driver, can own end-to-end" data-zh="核心：日常主力、能獨立負責">Core — daily driver, can own end-to-end</span></span>
+    <span><span class="doto"></span><span data-en="Familiar — used it, ramp up fast" data-zh="熟悉：用過、能快速上手">Familiar — used it, ramp up fast</span></span>
+  </div>
+</section>
+
+<!-- ===== 精選專案 ===== -->
+<section class="wrap" id="work" style="padding:0 26px 60px">
+  <div class="sec-head" data-reveal>
+    <span class="eyebrow">Selected work</span>
+    <h2 data-en="Featured projects" data-zh="精選專案">Featured projects</h2>
+    <p data-en="A few of my most representative projects — click through for the full case." data-zh="挑了幾個最有代表性的作品，點進去看完整介紹。">A few of my most representative projects — click through for the full case.</p>
+  </div>
+  <div id="featured-grid" data-reveal></div>
+  <div style="margin-top:26px"><a class="btn btn-ghost" href="projects.html" data-en="View all projects →" data-zh="查看全部專案 →">View all projects →</a></div>
+</section>
+
+<!-- ===== 聯絡 ===== -->
+<section class="contact" id="contact">
+  <div class="wrap" data-reveal>
+    <span class="eyebrow" style="justify-content:center">Get in touch</span>
+    <h2><span data-en="Let's build something" data-zh="一起做點">Let's build something</span> <span class="grad" data-en="great" data-zh="有趣的事">great</span><span data-en="" data-zh="吧"></span></h2>
+    <p data-en="Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you." data-zh="不論是工作機會、專案合作，或只是想聊聊技術，都歡迎找我。">Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you.</p>
+    <div class="cbtns">
+      <a class="btn btn-primary" id="mailbtn" href="#" data-href="email" data-en="Copy email" data-zh="複製 Email">Copy email</a>
+      <a class="btn btn-ghost" href="#" data-href="github" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="#" data-href="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <p class="copy" id="copyhint" data-bind="email">hello@henry.dev</p>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
