@@ -308,6 +308,15 @@
       // 按 Esc 收起
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
     }
+    // 已在首頁時，按 Logo / Home 改為平滑捲到頂端（不重新整理）
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a");
+      if (!a || a.getAttribute("href") !== "index.html") return;
+      if (document.body.getAttribute("data-page") !== "home") return;
+      e.preventDefault();
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
     var prog = $("#progress"), navEl = $("#site-nav");
     var onScroll = function () {
       var h = document.documentElement;

@@ -1,0 +1,6 @@
+# Local-only working notes (kept on disk, not tracked)
+CLAUDE.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
