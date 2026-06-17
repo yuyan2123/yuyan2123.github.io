@@ -10,16 +10,16 @@
 
 window.SITE = {
   name: "Henry",                          // 名字（多為同一份，可留字串）
-  brand: "Henry.dev",
+  brand: "Henry Yu",
   role:    { en: "Backend / Full-stack Engineer", zh: "後端 / 全端 軟體工程師" },
   tagline: { en: "I turn complex systems into clean, maintainable building blocks. Into distributed architecture, performance tuning, and a good late-night coffee.",
              zh: "專注於把複雜的系統，拆成乾淨、好維護的小元件。喜歡分散式架構、效能調校，以及一杯深夜的咖啡。" },
   status:  { en: "Open to work", zh: "開放接案中" },
-  location:{ en: "Taipei, Taiwan", zh: "台北，台灣" },
+  location:{ en: "Kaohsiung, Taiwan", zh: "高雄，臺灣" },
   resume: "#",                            // 履歷 PDF
-  email: "hello@henry.dev",
-  github: "https://github.com/",
-  linkedin: "https://linkedin.com/",
+  email: "yanheng0803@gmail.com",
+  github: "https://github.com/yuyan2123",
+  linkedin: "https://www.linkedin.com/in/yuyan2123/",
 
   marquee: ["Go","Rust","TypeScript","Kubernetes","PostgreSQL","React","Docker","gRPC","Redis","Node.js"],
 
