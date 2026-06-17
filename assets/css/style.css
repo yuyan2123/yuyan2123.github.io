@@ -330,9 +330,12 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
   .hero-btns .btn{justify-content:center;min-width:150px;max-width:100%}
   .hero .socials{justify-content:center;margin-top:24px}
   .marquee{margin-top:22px}
-  .about-hero{padding-top:26px;padding-bottom:6px}
-  .about-hero .photo{max-width:150px}
-  .about-hero .photo .avatar{height:175px}
+  /* 手機 about：照片改成對齊臉部的寬幅肖像（保留漸層外框），文字置中 */
+  .about-hero{padding-top:20px;padding-bottom:8px;gap:0;text-align:center}
+  .about-hero .photo{max-width:none;margin:0 auto 26px}
+  .about-hero .photo .avatar-wrap{display:block;border-radius:22px}
+  .about-hero .photo .avatar{width:100%;height:auto;aspect-ratio:16/9;max-height:230px;border-radius:19px;object-fit:cover;object-position:center 20%}
+  .about-hero p{margin-left:auto;margin-right:auto}
   .page-head{padding-top:40px;padding-bottom:6px}
   .c-side,.c-stat,.half{grid-column:span 6}
   .proj-grid{grid-template-columns:1fr}
