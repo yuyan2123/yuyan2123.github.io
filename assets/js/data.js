@@ -24,9 +24,9 @@ window.SITE = {
   marquee: ["Go","Rust","TypeScript","Kubernetes","PostgreSQL","React","Docker","gRPC","Redis","Node.js"],
 
   stats: [
-    { num: 5,  suffix: "+", label: { en: "Years of experience", zh: "年開發經驗" } },
-    { num: 30, suffix: "+", label: { en: "Projects shipped",     zh: "完成專案" } },
-    { num: 12, suffix: "k", label: { en: "GitHub stars",         zh: "GitHub 星數" } },
+    { num: 9, suffix: "+",  label: { en: "Years of coding",   zh: "年開發經驗" } },
+    { num: 4, suffix: "",   label: { en: "Industry projects", zh: "產學合作計畫" } },
+    { num: 8, suffix: "th", label: { en: "Gold Hand Award · National High School Commercial Skills Competition", zh: "全國高中職商業類學生技藝競賽 <span style='white-space:nowrap'>金手獎</span>" } },
   ],
 
   skills: [
