@@ -274,12 +274,20 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 
 /* ---------- RWD ---------- */
 @media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:26px;text-align:center}
-  .hero-art{order:-1}
-  .status,.hero-btns,.hero .socials{justify-content:center}
-  .hero .tag{margin-left:auto;margin-right:auto}
-  .hero-art .avatar{width:230px;height:250px}
-  .float.f1{right:6px}.float.f2{left:6px}
+  @media(min-width:621px){
+    .hero{padding:54px 0 24px}
+    .hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(276px,.92fr);gap:clamp(24px,4vw,36px);text-align:left;align-items:center}
+    .hero h1{font-size:clamp(46px,7.3vw,64px);line-height:.98}
+    .hero .role{font-size:clamp(19px,2.8vw,25px)}
+    .hero .tag{max-width:38ch;margin:18px 0 28px}
+    .hero-art{order:0;justify-self:stretch;display:grid;place-items:center;padding:0 12px}
+    .status,.hero-btns,.hero .socials{justify-content:flex-start}
+    .hero-art .avatar{width:clamp(260px,34vw,292px);height:clamp(292px,39vw,324px);border-radius:25px;object-position:center 20%}
+    .hero .avatar-wrap{border-radius:28px}
+    .hero .float{font-size:12.5px;padding:8px 11px}
+    .hero .float.f1{top:20px;right:-8px}
+    .hero .float.f2{bottom:26px;left:-10px}
+  }
   .c-bio{grid-column:span 6;grid-row:auto}
   .c-side,.c-stat,.half{grid-column:span 3}
   .skill-bento{grid-template-columns:1fr}
@@ -304,13 +312,23 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
   .nav-links a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
   .nav-links a.active::after{display:none}
   .burger{display:grid}
-  /* 手機 Hero：縮小頭像、收掉浮動標籤、讓名字盡早出現 */
-  .hero{padding:30px 0 18px}
-  .hero-grid{gap:20px}
-  .hero h1{font-size:clamp(40px,11vw,56px)}
-  .hero-art .avatar{width:150px;height:165px;border-radius:22px}
-  .avatar-wrap{border-radius:25px}
-  .float{display:none}
+  /* 手機 Hero：橫幅照片接上置中文字，避免把桌面肖像框縮小塞進版面 */
+  .hero{padding:0 0 16px}
+  .hero-grid{max-width:none;padding:0;grid-template-columns:1fr;gap:0;text-align:center}
+  .hero-art{order:-1;width:100%;justify-self:stretch;display:block;position:relative;margin:0 0 34px;overflow:hidden;background:var(--bg)}
+  .hero-art::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:36%;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+  .hero .avatar-wrap{display:block;width:100%;padding:0;border-radius:0;background:none;animation:none;box-shadow:none;overflow:hidden}
+  .hero .avatar-wrap::before,.hero .avatar-wrap::after{display:none}
+  .hero-art .avatar{width:100%;height:auto;min-height:190px;max-height:240px;aspect-ratio:16/9;border-radius:0;object-fit:cover;object-position:center 20%;background:var(--bg2)}
+  .hero .float{display:none}
+  .hero-text{display:flex;flex-direction:column;align-items:center;padding:0 26px 8px}
+  .status{justify-content:center;margin-bottom:18px}
+  .hero h1{font-size:52px;line-height:.96}
+  .hero .role{font-size:20px;margin-top:12px}
+  .hero .tag{max-width:32ch;font-size:16px;line-height:1.65;margin:18px auto 26px}
+  .hero-btns{justify-content:center;align-items:center;gap:10px 12px}
+  .hero-btns .btn{justify-content:center;min-width:150px;max-width:100%}
+  .hero .socials{justify-content:center;margin-top:24px}
   .marquee{margin-top:22px}
   .about-hero{padding-top:26px;padding-bottom:6px}
   .about-hero .photo{max-width:150px}
