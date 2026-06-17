@@ -12,6 +12,7 @@
   --body:"Hanken Grotesk","Noto Sans TC",sans-serif;
   --mono:"JetBrains Mono",monospace;
   --r:20px;
+  --sb-w:12px;                 /* 自訂捲軸軌道寬度（亦為預留空間） */
 }
 html[data-theme="dark"]{
   --bg:#0b0c0f; --bg2:#0e1014; --elev:#14161c; --elev2:#191c24;
@@ -33,7 +34,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip;transition:background .4s,color .4s}
 ::selection{background:var(--accent);color:#1a1408}
 a{color:inherit}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
 section{scroll-margin-top:90px;position:relative;z-index:1}
 
@@ -52,14 +53,26 @@ html[data-theme="light"] .blob{mix-blend-mode:multiply;filter:blur(110px)}
 /* ---- 捲動進度條 ---- */
 .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:120;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 
+/* ---- 自訂捲軸：隱藏原生捲軸、浮在內容之上但置於 nav 之後、停止捲動後淡出（全頁適用） ---- */
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+/* 浮層式捲軸：不占版面寬度（nav 與各區塊維持滿版、淡出不位移）；z-index 介於內容(1)與 nav(100) 之間，捲到頂端會滑進 nav 後方 */
+#scrollbar{position:fixed;top:0;right:0;z-index:50;width:var(--sb-w);height:100%;pointer-events:none;opacity:0;transition:opacity .3s ease}
+#scrollbar.show{opacity:1}
+#scrollbar .sb-thumb{position:absolute;top:0;right:2px;width:6px;min-height:36px;border-radius:999px;background:linear-gradient(180deg,var(--accent3),var(--accent2));box-shadow:0 2px 8px -3px rgba(0,0,0,.35);pointer-events:auto;cursor:grab;will-change:transform;transition:width .15s ease,right .15s ease}
+#scrollbar .sb-thumb:hover{width:8px;right:1px}
+#scrollbar .sb-thumb:active{cursor:grabbing;width:8px;right:1px}
+@media(prefers-reduced-motion:reduce){#scrollbar,#scrollbar .sb-thumb{transition:none}}
+@media(max-width:620px){:root{--sb-w:9px}#scrollbar .sb-thumb{width:5px;right:2px}#scrollbar .sb-thumb:hover,#scrollbar .sb-thumb:active{width:6px;right:1px}}
+
 /* ---- 標題系統 ---- */
 .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
 .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent)}
 .sec-head{margin-bottom:42px;max-width:62ch}
 .sec-head h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.4vw,46px);letter-spacing:-.02em;margin-top:12px;line-height:1.08}
 .sec-head p{color:var(--muted);margin-top:14px}
-.grad{background:linear-gradient(100deg,var(--accent3),var(--accent) 42%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shine 7s linear infinite}
-@keyframes shine{to{background-position:220% center}}
+.grad{background:linear-gradient(100deg,var(--accent3),var(--accent) 25%,var(--accent2) 50%,var(--accent) 75%,var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;background-position:0 center;animation:shine 7s linear infinite}
+@keyframes shine{to{background-position:200% center}}
 
 /* reveal */
 [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -99,28 +112,45 @@ nav.nav{position:relative;backdrop-filter:blur(14px);background:var(--glass);bor
 .pill.core{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 40%,transparent);color:var(--ink)}
 .pill:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--ink)}
 
-/* ---------- HERO（首頁） ---------- */
-.hero{padding:70px 0 26px}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:46px;align-items:center}
+/* ---------- HERO（首頁 · CV 框景雜誌版） ---------- */
+.hero{padding:40px 0 22px}
 .status{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;color:var(--ink);background:var(--elev);border:1px solid var(--line);padding:6px 14px;border-radius:999px;margin-bottom:22px}
 .status .pulse{width:9px;height:9px;border-radius:50%;background:#3ad07a;box-shadow:0 0 0 0 rgba(58,208,122,.6);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(58,208,122,0)}100%{box-shadow:0 0 0 0 rgba(58,208,122,0)}}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,8vw,82px);line-height:1.0;letter-spacing:-.03em}
-.hero .role{font-family:var(--display);font-weight:600;font-size:clamp(20px,3vw,28px);color:var(--ink);margin-top:8px;letter-spacing:-.01em}
+
+/* 版面骨架：直書軌 + 文字 + 框景肖像（無外框卡片，直接落在頁面上） */
+.hero-frame{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) clamp(360px,38%,440px);min-height:540px}
+
+/* 左側直書資訊軌 */
+.hero-rail{border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:26px 0}
+.hero-rail .rail-top,.hero-rail .rail-scroll{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.hero-rail .rail-bot{display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero-rail .rail-arrow{color:var(--accent);font-size:14px}
+
+/* 中間文字欄 */
+.hero-main{position:relative;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,5vw,60px) clamp(30px,4vw,50px)}
+.hero-main > :not(.hero-num){position:relative;z-index:1}
+.hero-main .status{align-self:flex-start}
+.hero-num{position:absolute;top:22px;right:30px;z-index:0;font-family:var(--display);font-weight:800;font-size:clamp(96px,12vw,140px);line-height:1;letter-spacing:-.04em;color:color-mix(in srgb,var(--accent) 9%,transparent);pointer-events:none;user-select:none}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,5.2vw,64px);line-height:1.06;letter-spacing:-.03em}
+.hero .role{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.4vw,25px);color:var(--ink);margin-top:26px;letter-spacing:-.01em}
 .hero .role b{color:var(--muted);font-weight:600}
-.hero .tag{color:var(--muted);font-size:18px;max-width:46ch;margin:20px 0 30px}
+.hero .tag{color:var(--muted);font-size:17px;max-width:42ch;margin:14px 0 28px;line-height:1.65}
 .hero-btns{display:flex;gap:13px;flex-wrap:wrap}
-.hero .socials{margin-top:26px}
-.hero-art{display:grid;place-items:center}
-.avatar-wrap{--ang:0deg;position:relative;padding:3px;border-radius:30px;background:conic-gradient(from var(--ang),var(--accent),var(--accent2),var(--accent3),var(--accent));animation:rotang 9s linear infinite;box-shadow:var(--shadow)}
-@keyframes rotang{to{--ang:360deg}}
-.avatar{width:300px;height:340px;border-radius:27px;background:linear-gradient(160deg,#1b1e26,#0e1014);display:grid;place-items:center;overflow:hidden;position:relative;object-fit:cover}
-html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2a8)}
-.avatar svg{width:58%;opacity:.85}
-.float{position:absolute;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:13px;padding:9px 13px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
-.float .mn{font-family:var(--mono);color:var(--accent)}
-.float.f1{top:24px;right:-18px}
-.float.f2{bottom:30px;left:-22px}
+.hero-foot{display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+.hero-mail{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+
+/* 右側全出血框景肖像 */
+.hero-photo{position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(150deg,#3a3f58,#15171f)}
+.hero-portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(.4) contrast(1.06) brightness(.95)}
+.photo-blend{position:absolute;inset:0;background:linear-gradient(165deg,color-mix(in srgb,var(--accent2) 45%,transparent),color-mix(in srgb,var(--bg) 45%,transparent));mix-blend-mode:color;pointer-events:none}
+.photo-edge{position:absolute;inset:0;background:linear-gradient(to right,color-mix(in srgb,var(--bg) 60%,transparent),transparent 30%);pointer-events:none}
+.photo-grid{position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/100% 26px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/26px 100%}
+.photo-frame{position:absolute;inset:22px;border:1px solid rgba(255,255,255,.28);border-radius:8px;pointer-events:none}
+.photo-scrim{position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(to top,rgba(8,9,12,.8),transparent);pointer-events:none}
+.photo-tag{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--accent);color:#1a1408;padding:3px 9px;border-radius:6px}
+.photo-cap{position:absolute;left:30px;right:30px;bottom:28px;font-family:var(--mono);font-size:12px;color:#ffd9a8;display:flex;justify-content:space-between;gap:10px}
+.photo-cap .photo-loc{color:var(--accent)}
 
 /* ---------- MARQUEE ---------- */
 .marquee{margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;
@@ -164,10 +194,8 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 /* ---------- PROJECTS ---------- */
 .featured{display:grid;grid-template-columns:1.1fr 1fr;background:var(--elev);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:24px;transition:border-color .25s;text-decoration:none;color:inherit}
 .featured:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
-.featured .cover{min-height:300px;position:relative;display:grid;place-items:center;color:#fff;background:linear-gradient(150deg,#3a3f58,#15171f);background-size:cover;background-position:center}
+.featured .cover{--inset:18px;min-height:300px;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;background:linear-gradient(150deg,#3a3f58,#15171f);background-size:cover;background-position:center}
 .featured .cover .label{font-family:var(--display);font-weight:800;font-size:34px;z-index:2;text-align:center;padding:0 24px;text-shadow:0 2px 16px rgba(0,0,0,.35)}
-.featured .cover::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 14px,transparent 14px 28px)}
-.featured .cover.has-img::after{display:none}
 .featured .body{padding:36px 38px;display:flex;flex-direction:column;justify-content:center}
 .featured .ribbon{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
 .featured h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.4vw,38px);letter-spacing:-.01em;margin:10px 0 12px}
@@ -176,15 +204,25 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .pcard{background:var(--elev);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,border-color .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .pcard:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
-.pcover{height:160px;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;background-size:cover;background-position:center}
+.pcover{--inset:13px;height:160px;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;background-size:cover;background-position:center}
 .pcover .lb{font-family:var(--display);font-weight:800;font-size:21px;z-index:2;text-align:center;padding:0 16px}
-.pcover::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 12px,transparent 12px 24px)}
-.pcover.has-img::after{display:none}
 .cv1{background:linear-gradient(150deg,#3a3f58,#15171f)}
 .cv2{background:linear-gradient(150deg,#2e6e63,#163f38)}
 .cv3{background:linear-gradient(150deg,#a8581f,#5e2c0c)}
 .cv4{background:linear-gradient(150deg,#5a3f7a,#2c1d44)}
 .cv5{background:linear-gradient(150deg,#1f5f8b,#10314a)}
+/* 封面：電腦視覺「框景」處理 —— 細感測格線 + 內框 + 類別角標；填了真圖時自動隱藏 */
+.featured .cover::after,.pcover::after,.detail-cover::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px) 0 0/100% 26px,
+            linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px) 0 0/26px 100%}
+.featured .cover::before,.pcover::before,.detail-cover::before{content:"";position:absolute;inset:var(--inset);pointer-events:none;z-index:1;
+  border:1px solid rgba(255,255,255,.26);border-radius:8px}
+.cov-tag{position:absolute;top:var(--inset);left:var(--inset);transform:translateY(-50%);z-index:3;
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--accent);color:#1a1408;padding:3px 9px;border-radius:6px;box-shadow:0 4px 12px -6px rgba(0,0,0,.55)}
+.featured .cover.has-img::after,.pcover.has-img::after,.detail-cover.has-img::after,
+.featured .cover.has-img::before,.pcover.has-img::before,.detail-cover.has-img::before{display:none}
+.has-img .cov-tag{display:none}
 .pbody{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
 .pbody .ptop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .pbody h3{font-family:var(--display);font-weight:700;font-size:19px}
@@ -207,8 +245,11 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 .page-head p{color:var(--muted);font-size:18px;max-width:56ch;margin-top:16px}
 
 /* ---------- ABOUT 頁 ---------- */
-.about-hero{padding-top:48px;padding-bottom:20px;display:grid;grid-template-columns:.7fr 1.3fr;gap:46px;align-items:center}
-.about-hero .photo .avatar{width:100%;height:380px}
+.about-hero{padding-top:48px;padding-bottom:20px;display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(30px,4vw,50px);align-items:center}
+.about-hero .photo{height:clamp(400px,42vw,470px)}
+.about-hero .hero-portrait{object-position:center 18%}
+/* about 肖像較窄，框景說明一律直排，避免兩段文字相撞 */
+.about-hero .photo-cap{flex-direction:column;align-items:flex-start;gap:3px;font-size:11.5px}
 .prose{max-width:68ch}
 .prose p{margin:0 0 20px;font-size:17.5px;color:var(--ink);opacity:.92}
 .prose p:first-of-type::first-letter{font-family:var(--display);font-weight:800;font-size:3.4em;float:left;line-height:.8;padding:6px 12px 0 0;color:var(--accent)}
@@ -238,10 +279,8 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 .detail-hero h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,6vw,62px);letter-spacing:-.03em;margin:16px 0 8px;line-height:1.02}
 .detail-hero .en{font-family:var(--mono);color:var(--accent);font-size:14px;letter-spacing:.1em}
 .detail-meta-row{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-family:var(--mono);font-size:13px}
-.detail-cover{height:clamp(220px,40vw,420px);border-radius:24px;margin:30px 0;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;box-shadow:var(--shadow);background-size:cover;background-position:center}
+.detail-cover{--inset:22px;height:clamp(220px,40vw,420px);border-radius:24px;margin:30px 0;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;box-shadow:var(--shadow);background-size:cover;background-position:center}
 .detail-cover .label{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,52px);z-index:2;text-shadow:0 2px 18px rgba(0,0,0,.4)}
-.detail-cover::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 16px,transparent 16px 32px)}
-.detail-cover.has-img::after{display:none}
 .detail-layout{display:grid;grid-template-columns:1fr 280px;gap:46px;align-items:start}
 .detail-body h2{font-family:var(--display);font-weight:700;font-size:26px;margin:34px 0 12px;letter-spacing:-.01em}
 .detail-body p{color:var(--ink);opacity:.92;margin-bottom:16px}
@@ -272,35 +311,39 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
 .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}
 .foot-in .socials a{width:38px;height:38px}
 
+/* ---------- 桌機強化（≥901） ---------- */
+@media(min-width:901px){
+  /* 首頁 About bento：拿掉 grid-row:auto 後重新密鋪，避免「近況」卡被撐高留白
+     版位：自傳(4×2) | 近況 ＋ 一張數據(右欄上下)；底部兩張寬數據(3+3) */
+  #about-teaser .c-side{display:flex;flex-direction:column;justify-content:center}
+  #about-teaser #stats .c-stat:nth-child(1){grid-column:span 2}
+  #about-teaser #stats .c-stat:nth-child(2),
+  #about-teaser #stats .c-stat:nth-child(3){grid-column:span 3}
+}
 /* ---------- RWD ---------- */
 @media(max-width:900px){
   @media(min-width:621px){
-    .hero{padding:54px 0 24px}
-    .hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(276px,.92fr);gap:clamp(24px,4vw,36px);text-align:left;align-items:center}
-    .hero h1{font-size:clamp(46px,7.3vw,64px);line-height:.98}
-    .hero .role{font-size:clamp(19px,2.8vw,25px)}
-    .hero .tag{max-width:38ch;margin:18px 0 28px}
-    .hero-art{order:0;justify-self:stretch;display:grid;place-items:center;padding:0 12px}
-    .status,.hero-btns,.hero .socials{justify-content:flex-start}
-    .hero-art .avatar{width:clamp(260px,34vw,292px);height:clamp(292px,39vw,324px);border-radius:25px;object-position:center 20%}
-    .hero .avatar-wrap{border-radius:28px}
-    .hero .float{font-size:12.5px;padding:8px 11px}
-    .hero .float.f1{top:20px;right:-8px}
-    .hero .float.f2{bottom:26px;left:-10px}
+    /* 平板：收起直書資訊軌，保留「文字＋框景肖像」兩欄 */
+    .hero{padding:30px 0 20px}
+    .hero-frame{grid-template-columns:minmax(0,1fr) clamp(280px,40%,360px);min-height:480px}
+    .hero-rail{display:none}
+    .hero-main{padding:clamp(34px,4.5vw,48px) clamp(28px,3.5vw,40px)}
+    .hero h1{font-size:clamp(42px,6vw,56px)}
+    .hero .role{font-size:clamp(19px,2.6vw,23px);margin-top:22px}
+    .hero .tag{max-width:36ch;margin:12px 0 24px}
+    .hero-num{font-size:clamp(80px,11vw,110px);top:18px;right:24px}
+    /* about hero（平板）：維持「框景肖像 + 文字」兩欄、縮小比例、文字左對齊 */
+    .about-hero{grid-template-columns:clamp(220px,32%,280px) minmax(0,1fr);gap:clamp(24px,3.5vw,38px);padding-top:34px}
+    .about-hero .photo{height:clamp(320px,44vw,400px)}
   }
+  /* 平板與手機共用：框景說明改直排，避免兩段文字相撞 */
+  .photo-cap{flex-direction:column;align-items:flex-start;gap:3px;font-size:11.5px}
   .c-bio{grid-column:span 6;grid-row:auto}
   .c-side,.c-stat,.half{grid-column:span 3}
   .skill-bento{grid-template-columns:1fr}
   .featured{grid-template-columns:1fr}
   .featured .cover{min-height:190px}
   .proj-grid{grid-template-columns:1fr 1fr}
-  /* about（手機與平板共用）：照片改對齊臉部的寬幅肖像、保留漸層外框、文字置中 */
-  .about-hero{grid-template-columns:1fr;gap:0;text-align:center;padding-top:36px;padding-bottom:12px}
-  .about-hero .photo{max-width:480px;margin:0 auto 28px}
-  .about-hero .photo .avatar-wrap{display:block;border-radius:24px}
-  .about-hero .photo .avatar{width:100%;height:auto;aspect-ratio:16/9;border-radius:21px;object-fit:cover;object-position:center 20%}
-  .about-hero .hero-btns{justify-content:center}
-  .about-hero p{margin-left:auto;margin-right:auto}
   .values{grid-template-columns:1fr}
   .detail-layout{grid-template-columns:1fr}
   .detail-side{position:static}
@@ -316,29 +359,36 @@ html[data-theme="light"] .avatar{background:linear-gradient(160deg,#fff3d6,#ffe2
   .nav-links a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
   .nav-links a.active::after{display:none}
   .burger{display:grid}
-  /* 手機 Hero：橫幅照片接上置中文字，避免把桌面肖像框縮小塞進版面 */
-  .hero{padding:0 0 16px}
-  .hero-grid{max-width:none;padding:0;grid-template-columns:1fr;gap:0;text-align:center}
-  .hero-art{order:-1;width:100%;justify-self:stretch;display:block;position:relative;margin:0 0 34px;overflow:hidden;background:var(--bg)}
-  .hero-art::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:36%;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
-  .hero .avatar-wrap{display:block;width:100%;padding:0;border-radius:0;background:none;animation:none;box-shadow:none;overflow:hidden}
-  .hero .avatar-wrap::before,.hero .avatar-wrap::after{display:none}
-  .hero-art .avatar{width:100%;height:auto;min-height:190px;max-height:240px;aspect-ratio:16/9;border-radius:0;object-fit:cover;object-position:center 20%;background:var(--bg2)}
-  .hero .float{display:none}
-  .hero-text{display:flex;flex-direction:column;align-items:center;padding:0 26px 8px}
-  .status{justify-content:center;margin-bottom:18px}
-  .hero h1{font-size:52px;line-height:.96}
-  .hero .role{font-size:20px;margin-top:12px}
-  .hero .tag{max-width:32ch;font-size:16px;line-height:1.65;margin:18px auto 26px}
-  .hero-btns{justify-content:center;align-items:center;gap:10px 12px}
-  .hero-btns .btn{justify-content:center;min-width:150px;max-width:100%}
-  .hero .socials{justify-content:center;margin-top:24px}
-  .marquee{margin-top:22px}
-  /* 手機 about：照片放大成滿版寬幅（沿用上方對齊臉部的設定） */
-  .about-hero{padding-top:18px}
-  .about-hero .photo{max-width:none;margin:0 auto 24px}
-  .about-hero .photo .avatar{max-height:230px;border-radius:19px}
-  .about-hero .photo .avatar-wrap{border-radius:22px}
+  /* 手機 Hero：框景肖像橫幅置頂、文字左對齊保留雜誌感、緊湊間距 */
+  .hero{padding:10px 0 14px}
+  .hero > .wrap{padding-left:16px;padding-right:16px}
+  .hero-frame{grid-template-columns:1fr;min-height:0}
+  .hero-rail{display:none}
+  .hero-photo{order:-1;aspect-ratio:4/3}
+  .hero-portrait{object-position:center 22%}
+  .photo-frame{inset:16px}
+  .photo-cap{left:22px;right:22px;bottom:20px}
+  .hero-main{padding:28px 22px 26px}
+  .hero-main .status{margin-bottom:16px}
+  .hero-num{font-size:84px;top:14px;right:18px}
+  .hero h1{font-size:clamp(40px,12.5vw,50px);line-height:1.02}
+  .hero .role{font-size:19px;margin-top:18px}
+  .hero .tag{max-width:40ch;font-size:16px;line-height:1.6;margin:12px 0 22px}
+  .hero-foot{margin-top:20px}
+  .hero-main .hero-btns{max-width:none;margin:0}
+  /* 兩頁共用：CTA 一律等寬雙欄，放不下才自動疊成單欄 */
+  .hero-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;width:100%;max-width:360px;margin:0 auto}
+  .hero-btns .btn{width:100%;justify-content:center}
+  /* Marquee：縮小字級、收窄邊緣淡出，讓字看起來是「滑過去」而非被切掉 */
+  .marquee{margin-top:18px;-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .marquee .track,.marquee .item{gap:32px}
+  .marquee .item{font-size:18px}
+  .marquee .item span::after{margin-left:32px}
+  /* 手機 about：框景肖像橫幅置頂、文字左對齊，與首頁 hero 一致 */
+  .about-hero{grid-template-columns:1fr;gap:0;padding-top:16px;padding-bottom:8px}
+  .about-hero .photo{height:auto;margin-bottom:22px}
+  .about-hero .hero-portrait{object-position:center 30%}
+  .about-hero .hero-btns{max-width:none;margin:0}
   .page-head{padding-top:40px;padding-bottom:6px}
   .c-side,.c-stat,.half{grid-column:span 6}
   .proj-grid{grid-template-columns:1fr}

@@ -92,16 +92,17 @@
 
   /* ---------- 工具 ---------- */
   function coverAttrs(p) {
-    if (p.cover) return { cls: "has-img", style: ' style="background-image:url(\'' + p.cover + '\')"', label: "" };
-    return { cls: (p.accent || "cv1"), style: "", label: t(p.title) };
+    if (p.cover) return { cls: "has-img", style: ' style="background-image:url(\'' + p.cover + '\')"', label: "", tag: "" };
+    return { cls: (p.accent || "cv1"), style: "", label: t(p.title), tag: t(p.kicker || (p.tags && p.tags[0]) || "") };
   }
+  function covTag(c) { return c.tag ? '<span class="cov-tag">' + c.tag + '</span>' : ""; }
   function tagsHtml(p) { return (p.tags || []).map(function (tg) { return "<span>" + t(tg) + "</span>"; }).join(""); }
 
   function cardHtml(p) {
     var c = coverAttrs(p);
     var keys = (p.tags || []).map(tagKey).join("|");
     return '<a class="pcard spot" href="project.html?id=' + p.id + '" data-tags="' + keys + '">' +
-      '<div class="pcover ' + c.cls + '"' + c.style + '>' + (c.label ? '<span class="lb">' + c.label + '</span>' : "") + '</div>' +
+      '<div class="pcover ' + c.cls + '"' + c.style + '>' + covTag(c) + (c.label ? '<span class="lb">' + c.label + '</span>' : "") + '</div>' +
       '<div class="pbody"><div class="ptop"><h3>' + t(p.title) + '</h3><span class="year">' + (p.year || "") + '</span></div>' +
       '<p>' + t(p.summary) + '</p>' +
       '<div class="ptags">' + tagsHtml(p) + '</div>' +
@@ -137,7 +138,7 @@
       var c = coverAttrs(big);
       var lead = (big.detail && big.detail.sections && big.detail.sections[0] && big.detail.sections[0].body && big.detail.sections[0].body[0]) || big.summary;
       html += '<a class="featured spot" href="project.html?id=' + big.id + '">' +
-        '<div class="cover ' + c.cls + '"' + c.style + '>' + (c.label ? '<span class="label">' + c.label + '</span>' : "") + '</div>' +
+        '<div class="cover ' + c.cls + '"' + c.style + '>' + covTag(c) + (c.label ? '<span class="label">' + c.label + '</span>' : "") + '</div>' +
         '<div class="body"><span class="ribbon">' + u("featured") + '</span><h3>' + t(big.title) + '</h3>' +
         '<p>' + t(lead) + '</p><div class="ptags">' + tagsHtml(big) + '</div><span class="plink">' + u("seeFull") + '</span></div></a>';
     }
@@ -200,7 +201,7 @@
       '<div class="detail-hero"><a class="back" href="projects.html">' + u("back") + '</a>' +
         '<div class="en">' + (p.title.en || "") + '</div><h1>' + t(p.title) + '</h1>' +
         '<div class="detail-meta-row"><span>' + (p.year || "") + '</span><span>' + t(p.role) + '</span><span>' + (p.stack || "") + '</span></div></div>' +
-      '<div class="detail-cover ' + c.cls + '"' + c.style + '>' + (c.label ? '<span class="label">' + c.label + '</span>' : "") + '</div>' +
+      '<div class="detail-cover ' + c.cls + '"' + c.style + '>' + covTag(c) + (c.label ? '<span class="label">' + c.label + '</span>' : "") + '</div>' +
       '<div class="detail-layout"><div class="detail-body">' +
         '<p class="lead-line">' + t(p.summary) + '</p>' + sections + gallery + pager +
       '</div><aside class="detail-side">' +
@@ -279,6 +280,10 @@
   }
 
   function initUI() {
+    // 禁止拖曳圖片：阻擋瀏覽器將 <img> 拖出/拖移的預設行為（涵蓋 Firefox 與動態插入的圖片）
+    document.addEventListener("dragstart", function (e) {
+      if (e.target && e.target.tagName === "IMG") e.preventDefault();
+    });
     var root = document.documentElement, key = "pf-theme";
     var saved = localStorage.getItem(key);
     if (saved) root.setAttribute("data-theme", saved);
@@ -358,7 +363,69 @@
     }
   }
 
+  /* ---------- 自訂捲軸（隱藏原生、停止後淡出、保留軌道空間） ---------- */
+  function initScrollbar() {
+    if (document.getElementById("scrollbar")) return;
+    var bar = document.createElement("div"); bar.id = "scrollbar"; bar.setAttribute("aria-hidden", "true");
+    var thumb = document.createElement("div"); thumb.className = "sb-thumb";
+    bar.appendChild(thumb); document.body.appendChild(bar);
+    var de = document.documentElement;
+    var hideTimer = 0, dragging = false, hasScroll = false, dragY = 0, dragTop = 0, thumbH = 0;
+
+    function update() {
+      var ch = de.clientHeight, sh = de.scrollHeight, max = sh - ch;
+      hasScroll = max > 1;
+      if (!hasScroll) { bar.classList.remove("show"); return; }
+      thumbH = Math.max(36, Math.round(ch * ch / sh));
+      var top = (de.scrollTop / max) * (ch - thumbH);
+      thumb.style.height = thumbH + "px";
+      thumb.style.transform = "translateY(" + top + "px)";
+    }
+    function hide() { if (!dragging) bar.classList.remove("show"); }
+    function reveal() {
+      if (!hasScroll) return;
+      bar.classList.add("show");
+      clearTimeout(hideTimer); hideTimer = setTimeout(hide, 900);
+    }
+    function onScroll() { update(); reveal(); }
+
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", function () { update(); reveal(); }, { passive: true });
+    addEventListener("load", update);
+    if (window.ResizeObserver) new ResizeObserver(update).observe(document.body);
+    // 滑鼠靠近右緣時顯示，方便抓取
+    addEventListener("pointermove", function (e) {
+      if (!dragging && e.clientX >= innerWidth - 28) reveal();
+    }, { passive: true });
+
+    // 拖曳捲軸
+    thumb.addEventListener("pointerdown", function (e) {
+      dragging = true; dragY = e.clientY; dragTop = de.scrollTop;
+      try { thumb.setPointerCapture(e.pointerId); } catch (err) {}
+      bar.classList.add("show"); clearTimeout(hideTimer);
+      de.style.scrollBehavior = "auto";   // 拖曳期間關閉平滑捲動，避免延遲
+      document.body.style.userSelect = "none"; e.preventDefault();
+    });
+    thumb.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var ch = de.clientHeight, max = de.scrollHeight - ch, span = ch - thumbH;
+      if (span <= 0) return;
+      var top = dragTop + (e.clientY - dragY) * (max / span);
+      window.scrollTo(0, Math.max(0, Math.min(max, top)));
+    });
+    function endDrag() {
+      if (!dragging) return; dragging = false;
+      de.style.scrollBehavior = "";
+      document.body.style.userSelect = "";
+      clearTimeout(hideTimer); hideTimer = setTimeout(hide, 900);
+    }
+    thumb.addEventListener("pointerup", endDrag);
+    thumb.addEventListener("pointercancel", endDrag);
+
+    update();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    renderNav(); renderDynamic(); applyI18n(); initUI(); initObservers();
+    renderNav(); renderDynamic(); applyI18n(); initUI(); initObservers(); initScrollbar();
   });
 })();

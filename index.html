@@ -16,29 +16,51 @@
 
 <div id="site-nav"></div>
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO（CV 框景雜誌版） ===== -->
 <header class="hero" id="home">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <span class="status"><span class="pulse"></span><span data-bind="status">Open to work</span></span>
-      <h1><span data-en="Hi, I'm" data-zh="嗨，我是">Hi, I'm</span><br><span class="grad" data-bind="name">Henry</span></h1>
-      <p class="role" data-bind="role">Backend / Full-stack Engineer</p>
-      <p class="tag" data-bind="tagline">I turn complex systems into clean, maintainable building blocks.</p>
-      <div class="hero-btns">
-        <a href="projects.html" class="btn btn-primary" data-en="View my work →" data-zh="看我的專案 →">View my work →</a>
-        <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
+  <div class="wrap">
+    <div class="hero-frame">
+      <!-- 左側直書資訊軌 -->
+      <div class="hero-rail" aria-hidden="true">
+        <span class="rail-top">Portfolio — 2026</span>
+        <div class="rail-bot">
+          <span class="rail-scroll">Scroll</span>
+          <span class="rail-arrow">↓</span>
+        </div>
       </div>
-      <div class="socials">
-        <a href="#" data-href="github" title="GitHub" target="_blank" rel="noopener">GH</a>
-        <a href="#" data-href="linkedin" title="LinkedIn" target="_blank" rel="noopener">in</a>
-        <a href="#contact" title="Email">@</a>
+      <!-- 文字欄 -->
+      <div class="hero-main">
+        <span class="hero-num" aria-hidden="true">01</span>
+        <span class="status"><span class="pulse"></span><span data-bind="status">Open to work</span></span>
+        <h1><span data-en="Hi, I'm" data-zh="嗨！我是">Hi, I'm</span><br><span class="grad" data-bind="name">Henry</span></h1>
+        <p class="role" data-bind="role">Backend / Full-stack Engineer</p>
+        <p class="tag" data-bind="tagline">I turn complex systems into clean, maintainable building blocks.</p>
+        <div class="hero-btns">
+          <a href="projects.html" class="btn btn-primary" data-en="View my work →" data-zh="看我的專案 →">View my work →</a>
+          <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
+        </div>
+        <div class="hero-foot">
+          <div class="socials">
+            <a href="#" data-href="github" title="GitHub" target="_blank" rel="noopener">GH</a>
+            <a href="#" data-href="linkedin" title="LinkedIn" target="_blank" rel="noopener">in</a>
+            <a href="#contact" title="Email">@</a>
+          </div>
+          <span class="hero-mail" data-bind="email">hello@henry.dev</span>
+        </div>
       </div>
-    </div>
-    <div class="hero-art">
-      <div class="avatar-wrap">
-        <img class="avatar" src="assets/img/me.png" alt="Henry">
-        <span class="float f1"><span class="mn">{ }</span> <span data-en="Open-source fan" data-zh="開源愛好者">Open-source fan</span></span>
-        <span class="float f2"><span class="mn">›_</span> <span data-en="Powered by coffee" data-zh="咖啡因驅動">Powered by coffee</span></span>
+      <!-- 右側全出血框景肖像 -->
+      <div class="hero-photo">
+        <img class="hero-portrait" src="assets/img/me.png" alt="Henry">
+        <span class="photo-blend" aria-hidden="true"></span>
+        <span class="photo-edge" aria-hidden="true"></span>
+        <span class="photo-grid" aria-hidden="true"></span>
+        <span class="photo-frame" aria-hidden="true"></span>
+        <span class="photo-scrim" aria-hidden="true"></span>
+        <span class="photo-tag">Subject — H.Yu</span>
+        <span class="photo-cap">
+          <span data-en="M.S. · Info Management" data-zh="資訊管理碩士">M.S. · Info Management</span>
+          <span class="photo-loc" data-bind="location">Kaohsiung, TW</span>
+        </span>
       </div>
     </div>
   </div>
@@ -53,7 +75,7 @@
     <p data-en="More than models and metrics — I care whether it actually helps the person using it." data-zh="不只是模型與數字，更在意它是不是真的幫得上使用它的人。">More than models and metrics — I care whether it actually helps the person using it.</p>
   </div>
   <div class="bento">
-    <article class="cell c-bio spot" data-reveal style="grid-row:auto">
+    <article class="cell c-bio spot" data-reveal>
       <span class="en" data-en="Biography" data-zh="自傳">Biography</span>
       <p class="big" data-en="I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing." data-zh="我是一名來自高雄的資訊管理碩士生，主要做電腦視覺與影像處理，把它們用在真實的問題上——從醫療到智慧製造。">I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing.</p>
       <p data-en="My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab." data-zh="我的碩士論文是用攝影機協助醫師客觀評估巴金森氏症，同時也接下智慧製造的產學合作計畫。比起把程式寫得多聰明，我更在意一件東西離開實驗室後，能不能穩定地在現實裡運作。">My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab.</p>
