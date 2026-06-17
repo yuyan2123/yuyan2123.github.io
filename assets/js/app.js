@@ -316,6 +316,8 @@
       e.preventDefault();
       var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
       window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      // 清掉殘留的錨點（例如 #contact），讓網址回到乾淨的首頁
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
     });
     var prog = $("#progress"), navEl = $("#site-nav");
     var onScroll = function () {
