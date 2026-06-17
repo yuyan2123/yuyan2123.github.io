@@ -26,7 +26,7 @@ window.SITE = {
   stats: [
     { num: 9, suffix: "+",  label: { en: "Years of coding",   zh: "年開發經驗" } },
     { num: 4, suffix: "",   label: { en: "Industry projects", zh: "產學合作計畫" } },
-    { num: 8, suffix: "th", label: { en: "Gold Hand Award · National High School Commercial Skills Competition", zh: "全國高中職商業類學生技藝競賽 <span style='white-space:nowrap'>金手獎</span>" } },
+    { num: 8, suffix: "th", label: { en: "Gold Hand Award · National High School Commercial Skills Competition", zh: "全國高級中等學校商業類學生技藝競賽 <span style='white-space:nowrap'>金手獎</span>" } },
   ],
 
   skills: [
