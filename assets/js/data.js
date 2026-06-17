@@ -6,6 +6,7 @@
    ★ 要新增專案：在 PROJECTS 陣列最前面複製一個 { ... } 改內容。
      它會自動出現在首頁精選、專案列表、與專屬詳情頁。
    ★ 圖片放 assets/img/，cover/gallery 填路徑；留空則用漸層底。
+     封面裁切位置可用 coverPos 調整（CSS background-position，例：center top）。
    ============================================================ */
 
 window.SITE = {
@@ -45,7 +46,8 @@ window.PROJECTS = [
                zh: "和工研院（ITRI）合作的案子。我們想做一台不必按、也不必滑的服務機台——人走到它面前，它就知道有人來了，接下來用講的就行。" },
     tags: [{ en: "Multimodal AI", zh: "多模態 AI" }, { en: "Computer Vision", zh: "電腦視覺" }, { en: "Voice", zh: "語音互動" }, { en: "Edge AI", zh: "邊緣運算 AI" }, { en: "Industry collaboration", zh: "產學合作" }],
     featured: true,
-    cover: "",
+    cover: "assets/img/itri-smart-kiosk.png",
+    coverPos: "center top",                 // 重點在機台上方的攝影機與麥克風，裁切時貼齊上緣
     accent: "cv1",
     kicker: { en: "Multimodal", zh: "多模態" },
     role: { en: "Team project · with ITRI", zh: "團隊專案 · 與工研院" },

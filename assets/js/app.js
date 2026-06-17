@@ -92,7 +92,10 @@
 
   /* ---------- 工具 ---------- */
   function coverAttrs(p) {
-    if (p.cover) return { cls: "has-img", style: ' style="background-image:url(\'' + p.cover + '\')"', label: "", tag: "" };
+    if (p.cover) {
+      var pos = p.coverPos ? ";background-position:" + p.coverPos : "";
+      return { cls: "has-img", style: ' style="background-image:url(\'' + p.cover + '\')' + pos + '"', label: "", tag: "" };
+    }
     return { cls: (p.accent || "cv1"), style: "", label: t(p.title), tag: t(p.kicker || (p.tags && p.tags[0]) || "") };
   }
   function covTag(c) { return c.tag ? '<span class="cov-tag">' + c.tag + '</span>' : ""; }
