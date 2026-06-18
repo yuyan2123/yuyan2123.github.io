@@ -82,7 +82,8 @@ window.PROJECTS = [
                zh: "和一家智慧製造業者合作的案子。用一支攝影機盯著工作站，一步一步看作業員有沒有照 SOP 做。" },
     tags: [{ en: "Computer Vision", zh: "電腦視覺" }, { en: "Edge AI", zh: "邊緣運算 AI" }, { en: "Smart manufacturing", zh: "智慧製造" }, { en: "Industry collaboration", zh: "產學合作" }],
     featured: true,
-    cover: "",
+    cover: "assets/img/smart-sop.png",
+    coverPos: "center top",                 // 對齊上緣置中
     accent: "cv2",
     kicker: { en: "Edge vision", zh: "邊緣視覺" },
     role: { en: "Solo project · smart-manufacturing partner", zh: "獨立負責 · 與智慧製造業者" },
