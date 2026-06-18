@@ -22,7 +22,7 @@ window.SITE = {
   github: "https://github.com/yuyan2123",
   linkedin: "https://www.linkedin.com/in/yuyan2123/",
 
-  marquee: ["Go","Rust","TypeScript","Kubernetes","PostgreSQL","React","Docker","gRPC","Redis","Node.js"],
+  marquee: ["Python","Computer Vision","Edge AI","LLM","VLM","Multimodal AI","OCR","Selenium","Playwright"],
 
   stats: [
     { num: 9, suffix: "+",  label: { en: "Years of coding",   zh: "年開發經驗" } },
@@ -31,9 +31,9 @@ window.SITE = {
   ],
 
   skills: [
-    { group: { en: "Backend",  zh: "後端" }, en: "backend",  core: ["Go","Node.js","PostgreSQL"], more: ["Rust","Python","Redis","gRPC"] },
-    { group: { en: "Frontend", zh: "前端" }, en: "frontend", core: ["TypeScript","React","HTML / CSS"], more: ["Next.js","Tailwind","Vite"] },
-    { group: { en: "Tooling",  zh: "工具" }, en: "devops",   core: ["Docker","Git","Linux"], more: ["Kubernetes","GitHub Actions","Terraform"] },
+    { group: { en: "AI / Vision",       zh: "AI 與電腦視覺" }, en: "ai-vision", core: ["Python","Computer Vision","OpenCV"],       more: ["OCR","LLM","VLM","Multimodal AI"] },
+    { group: { en: "Edge & Automation", zh: "邊緣與自動化" },   en: "edge-auto", core: ["Jetson Orin Nano","Edge AI","Linux"],     more: ["Selenium","Playwright","Web scraping"] },
+    { group: { en: "UI & Web",          zh: "介面與網頁" },     en: "ui-web",    core: ["Tkinter","JavaScript","HTML / CSS"],      more: ["Git","RWD"] },
   ],
 };
 
