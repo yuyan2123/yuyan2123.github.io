@@ -12,9 +12,9 @@
 window.SITE = {
   name: "Henry",                          // 名字（多為同一份，可留字串）
   brand: "Henry Yu",
-  role:    { en: "Backend / Full-stack Engineer", zh: "後端 / 全端 軟體工程師" },
-  tagline: { en: "I turn complex systems into clean, maintainable building blocks. Into distributed architecture, performance tuning, and a good late-night coffee.",
-             zh: "專注於把複雜的系統，拆成乾淨、好維護的小元件。喜歡分散式架構、效能調校，以及一杯深夜的咖啡。" },
+  role:    { en: "Computer Vision / Edge AI Engineer", zh: "電腦視覺 / 邊緣 AI 工程師" },
+  tagline: { en: "I build vision systems that make sense of what a camera sees — detecting, recognizing, and reading meaning out of images. Into computer vision, image analysis, and a good late-night coffee.",
+             zh: "打造看得懂畫面的視覺系統——偵測、辨識，把影像裡的內容讀成可用的資訊。喜歡電腦視覺、影像分析，以及一杯深夜的咖啡。" },
   status:  { en: "Open to work", zh: "開放接案中" },
   location:{ en: "Kaohsiung, Taiwan", zh: "高雄 ● 臺灣" },
   resume: "#",                            // 履歷 PDF
