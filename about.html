@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="about">
-<div class="bg-fx"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
-<div class="grain"></div>
+<div class="bg-fx"></div>
 <div class="progress" id="progress"></div>
 
 <div id="site-nav"></div>
@@ -31,21 +30,20 @@
     </span>
   </div>
   <div data-reveal>
-    <span class="eyebrow">About me</span>
+    <span class="eyebrow" data-en="About me" data-zh="關於我">About me</span>
     <h1 style="font-family:var(--display);font-weight:800;font-size:clamp(38px,6vw,68px);letter-spacing:-.03em;line-height:1.04;margin:14px 0 10px"><span data-en="Hi, I'm" data-zh="嗨，我是">Hi, I'm</span> <span class="grad" data-bind="name">Henry</span></h1>
     <p class="role" style="font-family:var(--display);font-weight:600;font-size:clamp(20px,3vw,26px)" data-bind="role">Computer Vision / Edge AI Engineer</p>
     <p style="color:var(--muted);font-size:18px;margin-top:16px;max-width:44ch" data-bind="tagline">I build vision systems that make sense of what a camera sees — detecting, recognizing, and reading meaning out of images.</p>
     <div class="hero-btns" style="margin-top:26px">
       <a class="btn btn-primary" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
-      <a class="btn btn-ghost" href="index.html#contact" data-en="Contact me →" data-zh="聯絡我 →">Contact me →</a>
+      <a class="btn btn-ghost" href="index.html#contact" data-en="Contact me" data-zh="聯絡我">Contact me</a>
     </div>
   </div>
 </section>
 
 <!-- ===== 我的故事 ===== -->
 <section class="wrap" style="padding-top:64px;padding-bottom:20px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">My story</span>
+  <div class="sec-quiet" data-reveal>
     <h2 data-en="My story" data-zh="我的故事">My story</h2>
   </div>
   <div data-reveal>
@@ -68,9 +66,8 @@
 
 <!-- ===== 經歷時間軸 ===== -->
 <section class="wrap" style="padding-top:46px;padding-bottom:20px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">Experience</span>
-    <h2 data-en="Experience" data-zh="經歷">Experience</h2>
+  <div class="sec-numbered" data-reveal>
+    <div class="top"><span class="no">02</span><h2 data-en="Experience" data-zh="經歷">Experience</h2></div>
   </div>
   <div class="timeline" data-reveal>
     <div class="tl-item">
@@ -96,22 +93,24 @@
 
 <!-- ===== 價值觀 ===== -->
 <section class="wrap" style="padding-top:46px;padding-bottom:20px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">How I work</span>
-    <h2 data-en="What I believe" data-zh="我相信的事">What I believe</h2>
+  <div class="sec-split" data-reveal>
+    <span class="lbl" data-en="How I work" data-zh="工作方式">How I work</span>
+    <div>
+      <h2 data-en="What I believe" data-zh="我相信的事">What I believe</h2>
+    </div>
   </div>
   <div class="values">
-    <article class="vcard spot" data-reveal>
+    <article class="vcard" data-reveal>
       <div class="vn">01</div>
       <h3 data-en="Write for the next person" data-zh="為下一個人而寫">Write for the next person</h3>
       <p data-en="Nine out of ten readers of your code are future maintainers — including you in three months. Readability first." data-zh="程式碼的讀者，九成是未來的維護者，包括三個月後的自己。可讀性優先。">Nine out of ten readers of your code are future maintainers — including you in three months. Readability first.</p>
     </article>
-    <article class="vcard spot" data-reveal>
+    <article class="vcard" data-reveal>
       <div class="vn">02</div>
       <h3 data-en="Simple before clever" data-zh="先簡單，再聰明">Simple before clever</h3>
       <p data-en="If one function solves it, don't reach for a framework first. Spend complexity where it counts." data-zh="能用一個函式解決的，就不要先上框架。複雜度要花在刀口上。">If one function solves it, don't reach for a framework first. Spend complexity where it counts.</p>
     </article>
-    <article class="vcard spot" data-reveal>
+    <article class="vcard" data-reveal>
       <div class="vn">03</div>
       <h3 data-en="Know why it fails" data-zh="搞懂它為什麼錯">Know why it fails</h3>
       <p data-en="A model that's right by luck will fail by surprise. I care about the cases it gets wrong as much as the ones it gets right." data-zh="靠運氣對的模型，遲早會莫名其妙地錯。它錯在哪，我和它對在哪一樣在意。">A model that's right by luck will fail by surprise. I care about the cases it gets wrong as much as the ones it gets right.</p>
@@ -121,12 +120,11 @@
 
 <!-- ===== 螢幕之外 ===== -->
 <section class="wrap" style="padding-top:46px;padding-bottom:70px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">Off screen</span>
+  <div class="sec-quiet" data-reveal>
     <h2 data-en="Off screen" data-zh="螢幕之外">Off screen</h2>
   </div>
-  <div class="bento" data-reveal>
-    <article class="cell c-side half spot">
+  <div class="mini-cols" data-reveal>
+    <article class="cell c-side">
       <span class="en" data-en="Listening" data-zh="在聽">Listening</span>
       <h3 data-en="On repeat" data-zh="最近在聽">On repeat</h3>
       <ul>
@@ -135,7 +133,7 @@
         <li><span class="mn">♫</span> <a href="https://open.spotify.com/track/0Rp4jmwBigtBymrPsMCt3G" target="_blank" rel="noopener">Keep You Mine (Acoustic) — NOTD, shy martin ↗</a></li>
       </ul>
     </article>
-    <article class="cell c-side half spot">
+    <article class="cell c-side">
       <span class="en" data-en="Hobbies" data-zh="興趣">Hobbies</span>
       <h3 data-en="When I'm not coding" data-zh="不寫程式的時候">When I'm not coding</h3>
       <ul>

@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="home">
-<div class="bg-fx"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
-<div class="grain"></div>
+<div class="bg-fx"></div>
 <div class="progress" id="progress"></div>
 
 <div id="site-nav"></div>
@@ -36,7 +35,7 @@
         <p class="role" data-bind="role">Computer Vision / Edge AI Engineer</p>
         <p class="tag" data-bind="tagline">I build vision systems that make sense of what a camera sees — detecting, recognizing, and reading meaning out of images.</p>
         <div class="hero-btns">
-          <a href="projects.html" class="btn btn-primary" data-en="View my work →" data-zh="看我的專案 →">View my work →</a>
+          <a href="projects.html" class="btn btn-primary" data-en="View my work" data-zh="看我的專案">View my work</a>
           <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
         </div>
         <div class="hero-foot">
@@ -64,24 +63,22 @@
       </div>
     </div>
   </div>
-  <div class="wrap"><div class="marquee" id="marquee" data-reveal></div></div>
 </header>
 
 <!-- ===== ABOUT 摘要 ===== -->
 <section class="wrap" id="about-teaser" style="padding-top:86px;padding-bottom:86px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">About</span>
+  <div class="sec-editorial" data-reveal>
     <h2 data-en="A bit about me" data-zh="關於我">A bit about me</h2>
     <p data-en="More than models and metrics — I care whether it actually helps the person using it." data-zh="不只是模型與數字，更在意它是不是真的幫得上使用它的人。">More than models and metrics — I care whether it actually helps the person using it.</p>
   </div>
   <div class="bento">
-    <article class="cell c-bio spot" data-reveal>
+    <article class="cell c-bio" data-reveal>
       <span class="en" data-en="Biography" data-zh="自傳">Biography</span>
       <p class="big" data-en="I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing." data-zh="我是一名來自高雄的資訊管理碩士生，主要做電腦視覺與影像處理，把它們用在真實的問題上——從醫療到智慧製造。">I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing.</p>
       <p data-en="My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab." data-zh="我的碩士論文是用攝影機協助醫師客觀評估巴金森氏症，同時也接下智慧製造的產學合作計畫。比起把程式寫得多聰明，我更在意一件東西離開實驗室後，能不能穩定地在現實裡運作。">My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab.</p>
-      <div class="more"><a class="btn btn-ghost" href="about.html" data-en="Read full bio →" data-zh="完整自我介紹 →">Read full bio →</a></div>
+      <div class="more"><a class="btn btn-ghost" href="about.html" data-en="Read full bio" data-zh="完整自我介紹">Read full bio</a></div>
     </article>
-    <article class="cell c-side spot" data-reveal>
+    <article class="cell c-side" data-reveal>
       <span class="en" data-en="Currently" data-zh="近況">Currently</span>
       <h3 data-en="What I'm doing" data-zh="正在做的事">What I'm doing</h3>
       <ul>
@@ -96,10 +93,9 @@
 
 <!-- ===== SKILLS ===== -->
 <section class="wrap" id="skills-sec" style="padding:0 26px 86px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">Skills</span>
+  <div class="sec-quiet" data-reveal>
     <h2 data-en="Tech stack" data-zh="技術棧">Tech stack</h2>
-    <p data-en="Grouped by area. Filled chips are core skills; outlined ones I'm comfortable ramping up on." data-zh="依領域分組，實心代表核心技能、外框代表熟悉並能上手。">Grouped by area. Filled chips are core skills; outlined ones I'm comfortable ramping up on.</p>
+    <p data-en="Grouped by area — bold marks core skills, the rest I'm comfortable ramping up on." data-zh="依領域分組，粗體代表核心技能，其餘則是熟悉並能快速上手的部分。">Grouped by area — bold marks core skills, the rest I'm comfortable ramping up on.</p>
   </div>
   <div class="skill-bento" id="skills" data-reveal></div>
   <div class="skill-note">
@@ -110,27 +106,31 @@
 
 <!-- ===== 精選專案 ===== -->
 <section class="wrap" id="work" style="padding:0 26px 60px">
-  <div class="sec-head" data-reveal>
-    <span class="eyebrow">Selected work</span>
-    <h2 data-en="Featured projects" data-zh="精選專案">Featured projects</h2>
-    <p data-en="A few of my most representative projects — click through for the full case." data-zh="挑了幾個最有代表性的作品，點進去看完整介紹。">A few of my most representative projects — click through for the full case.</p>
+  <div class="sec-split" data-reveal>
+    <span class="lbl" data-en="Selected work" data-zh="精選專案">Selected work</span>
+    <div>
+      <h2 data-en="Featured projects" data-zh="精選專案">Featured projects</h2>
+      <p data-en="A few of my most representative projects — click through for the full case." data-zh="挑了幾個最有代表性的作品，點進去看完整介紹。">A few of my most representative projects — click through for the full case.</p>
+    </div>
   </div>
   <div id="featured-grid" data-reveal></div>
-  <div style="margin-top:26px"><a class="btn btn-ghost" href="projects.html" data-en="View all projects →" data-zh="查看全部專案 →">View all projects →</a></div>
+  <div style="margin-top:26px"><a class="btn btn-ghost" href="projects.html" data-en="View all projects" data-zh="查看全部專案">View all projects</a></div>
 </section>
 
 <!-- ===== 聯絡 ===== -->
 <section class="contact" id="contact">
   <div class="wrap" data-reveal>
-    <span class="eyebrow" style="justify-content:center">Get in touch</span>
-    <h2><span data-en="Let's build something" data-zh="一起做點">Let's build something</span> <span class="grad" data-en="great" data-zh="有趣的事">great</span><span data-en="" data-zh="吧"></span></h2>
-    <p data-en="Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you." data-zh="不論是工作機會、專案合作，或只是想聊聊技術，都歡迎找我。">Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you.</p>
-    <div class="cbtns">
-      <a class="btn btn-primary" id="mailbtn" href="#" data-href="email" data-en="Copy email" data-zh="複製 Email">Copy email</a>
-      <a class="btn btn-ghost" href="#" data-href="github" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="btn btn-ghost" href="#" data-href="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <div class="inner">
+      <p class="kicker" data-en="Get in touch" data-zh="聯絡我">Get in touch</p>
+      <h2><span data-en="Let's build something" data-zh="一起做點">Let's build something</span> <span class="grad" data-en="great" data-zh="有趣的事">great</span><span data-en="" data-zh="吧"></span></h2>
+      <p data-en="Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you." data-zh="不論是工作機會、專案合作，或只是想聊聊技術，都歡迎找我。">Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you.</p>
+      <div class="cbtns">
+        <a class="btn btn-primary" id="mailbtn" href="#" data-href="email" data-en="Copy email" data-zh="複製 Email">Copy email</a>
+        <a class="btn btn-ghost" href="#" data-href="github" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="#" data-href="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <p class="copy" id="copyhint" data-bind="email">hello@henry.dev</p>
     </div>
-    <p class="copy" id="copyhint" data-bind="email">hello@henry.dev</p>
   </div>
 </section>
 

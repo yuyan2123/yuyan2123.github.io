@@ -19,17 +19,17 @@
   }
   function tagKey(tg) { return typeof tg === "object" ? tg.en : tg; }
   var UI = {
-    en: { view:"View project →", featured:"★ Featured", seeFull:"See full case →",
+    en: { view:"View project", featured:"Featured", seeFull:"See full case",
           back:"← Back to projects", prev:"← Previous", next:"Next →",
-          year:"Year", role:"Role", stack:"Stack", tags:"Tags",
-          repo:"Source ↗", demo:"Live ↗", article:"Article →", all:"All",
+          year:"Year", role:"Role", stack:"Stack", tags:"Tags", details:"Details",
+          repo:"Source ↗", demo:"Live ↗", article:"Article ↗", all:"All",
           notFound:"Project not found", notFoundLink:"project list",
           notFoundPre:"Please pick one from the ", notFoundPost:".",
           builtBy:"Hand-coded · hosted on GitHub Pages", copied:"Copied ✓", sep:", " },
-    zh: { view:"查看專案 →", featured:"★ 精選專案", seeFull:"看完整介紹 →",
+    zh: { view:"查看專案", featured:"精選專案", seeFull:"看完整介紹",
           back:"← 返回專案列表", prev:"← 上一個", next:"下一個 →",
-          year:"年份", role:"角色", stack:"技術", tags:"標籤",
-          repo:"原始碼 ↗", demo:"線上版本 ↗", article:"技術文章 →", all:"全部",
+          year:"年份", role:"角色", stack:"技術", tags:"標籤", details:"詳情",
+          repo:"原始碼 ↗", demo:"線上版本 ↗", article:"技術文章 ↗", all:"全部",
           notFound:"找不到這個專案", notFoundLink:"專案列表",
           notFoundPre:"請回到 ", notFoundPost:" 重新選擇。",
           builtBy:"純手刻 · 以 GitHub Pages 架設", copied:"已複製 ✓", sep:"、" },
@@ -113,15 +113,10 @@
   }
 
   /* ---------- 首頁 ---------- */
-  function renderMarquee() {
-    var host = $("#marquee"); if (!host) return;
-    var inner = (S.marquee || []).map(function (m) { return "<span>" + m + "</span>"; }).join("");
-    host.innerHTML = '<div class="track"><div class="item">' + inner + '</div><div class="item">' + inner + '</div></div>';
-  }
   function renderStats() {
     var host = $("#stats"); if (!host) return;
     host.innerHTML = (S.stats || []).map(function (s) {
-      return '<article class="cell c-stat spot" data-reveal><span class="num" data-count="' + s.num + '" data-suffix="' + (s.suffix || "") + '">0</span><span class="k">' + t(s.label) + '</span></article>';
+      return '<article class="cell c-stat" data-reveal><span class="num">' + s.num + (s.suffix || "") + '</span><span class="k">' + t(s.label) + '</span></article>';
     }).join("");
   }
   function renderSkills() {
@@ -208,6 +203,7 @@
       '<div class="detail-layout"><div class="detail-body">' +
         '<p class="lead-line">' + t(p.summary) + '</p>' + sections + gallery + pager +
       '</div><aside class="detail-side">' +
+        '<p class="side-head">' + u("details") + '</p>' +
         '<div class="row"><div class="k">' + u("year") + '</div><div class="v">' + (p.year || "—") + '</div></div>' +
         '<div class="row"><div class="k">' + u("role") + '</div><div class="v">' + t(p.role) + '</div></div>' +
         '<div class="row"><div class="k">' + u("stack") + '</div><div class="v">' + (p.stack || "—") + '</div></div>' +
@@ -229,13 +225,6 @@
   }
 
   /* ---------- 互動 ---------- */
-  function countUp(el) {
-    var target = parseFloat(el.dataset.count), suf = el.dataset.suffix || "", t0 = null, dur = 1100;
-    function step(ts) { if (!t0) t0 = ts; var pr = Math.min((ts - t0) / dur, 1);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - pr, 3))) + suf;
-      if (pr < 1) requestAnimationFrame(step); }
-    requestAnimationFrame(step);
-  }
   function attachSpot() {
     $$(".spot").forEach(function (c) {
       if (c._spot) return; c._spot = 1;
@@ -248,18 +237,15 @@
   }
   function renderDynamic() {
     bindSite(); renderFooter();
-    renderMarquee(); renderStats(); renderSkills(); renderFeatured();
+    renderStats(); renderSkills(); renderFeatured();
     renderProjectList(); renderProjectDetail();
-  }
-  function fillCounts() {
-    $$("[data-count]").forEach(function (el) { el.textContent = el.dataset.count + (el.dataset.suffix || ""); });
   }
   function applyLang() {
     // 切換期間關掉逐項浮入動畫，讓整頁交叉淡入更乾淨
     document.documentElement.classList.add("no-reveal-anim");
     renderDynamic(); applyI18n();
     $$("[data-reveal]").forEach(function (e) { e.classList.add("in"); });
-    fillCounts(); attachSpot();
+    attachSpot();
   }
   function setLang(l) {
     if (l === lang) return;
@@ -347,8 +333,6 @@
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) {
         e.target.classList.add("in");
-        $$("[data-count]", e.target).forEach(countUp);
-        if (e.target.dataset && e.target.dataset.count) countUp(e.target);
         io.unobserve(e.target);
       } });
     }, { threshold: .18 });
