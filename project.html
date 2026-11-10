@@ -1,22 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<script>
+(function () {
+  var root = document.documentElement;
+  var theme = root.getAttribute("data-theme") || "light";
+  var language = "zh";
+  try {
+    var saved = localStorage.getItem("pf-theme");
+    if (saved === "dark" || saved === "light") theme = saved;
+    var savedLanguage = localStorage.getItem("pf-lang");
+    if (savedLanguage === "en" || savedLanguage === "zh") language = savedLanguage;
+  } catch (_) {}
+  root.setAttribute("data-theme", theme);
+  root.style.colorScheme = theme;
+  var markupLanguage = root.lang === "en" ? "en" : "zh";
+  if (markupLanguage !== language) root.setAttribute("data-language-pending", "");
+  root.lang = language === "en" ? "en" : "zh-Hant";
+})();
+</script>
+<style id="theme-paint">
+:root { --color-paper: oklch(98.5% 0.005 260); }
+html[data-theme="dark"] { --color-paper: oklch(17% .014 260); }
+html { background: var(--color-paper); }
+/* Only show a restored language after its text and dynamic content agree. */
+html[data-language-pending] body { visibility: hidden; }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project — Henry</title>
+<meta name="description" content="Henry Yu 的個人履歷與專案作品。專注電腦視覺、Edge AI、醫療影像研究與智慧製造。">
+<title>Project, Henry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Barlow:wght@400;500&family=Noto+Sans+TC:wght@400;500;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="project">
+<a class="skip-link" href="#main-content" data-en="Skip to content" data-zh="跳至主要內容">Skip to content</a>
 <div class="bg-fx"></div>
 <div class="progress" id="progress"></div>
 
-<div id="site-nav"></div>
+<div id="site-nav"><nav class="nav"><div class="nav-in"><a class="logo" href="index.html">Henry Yu</a><div class="nav-links"><a href="about.html">About</a><a href="projects.html">Projects</a><a href="index.html#contact">Contact</a></div></div></nav></div>
+<main id="main-content">
 
-<section class="wrap" id="project-detail" style="padding:20px 26px 90px"></section>
+<section class="wrap" id="project-detail"></section>
 
+</main>
 <div id="site-foot"></div>
 
 <script src="assets/js/data.js"></script>

@@ -1,34 +1,64 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
+<!DOCTYPE html><html lang="zh-Hant" data-theme="light"><head>
 <meta charset="UTF-8">
+<script>
+(function () {
+  var root = document.documentElement;
+  var theme = root.getAttribute("data-theme") || "light";
+  var language = "zh";
+  try {
+    var saved = localStorage.getItem("pf-theme");
+    if (saved === "dark" || saved === "light") theme = saved;
+    var savedLanguage = localStorage.getItem("pf-lang");
+    if (savedLanguage === "en" || savedLanguage === "zh") language = savedLanguage;
+  } catch (_) {}
+  root.setAttribute("data-theme", theme);
+  root.style.colorScheme = theme;
+  var markupLanguage = root.lang === "en" ? "en" : "zh";
+  if (markupLanguage !== language) root.setAttribute("data-language-pending", "");
+  root.lang = language === "en" ? "en" : "zh-Hant";
+})();
+</script>
+<style id="theme-paint">
+:root { --color-paper: oklch(98.5% 0.005 260); }
+html[data-theme="dark"] { --color-paper: oklch(17% .014 260); }
+html { background: var(--color-paper); }
+/* Only show a restored language after its text and dynamic content agree. */
+html[data-language-pending] body { visibility: hidden; }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — Henry</title>
+<meta name="description" content="Henry Yu 的個人履歷與專案作品。專注電腦視覺、Edge AI、醫療影像研究與智慧製造。">
+<title>Henry Yu | 專案作品</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&amp;family=Barlow:wght@400;500&amp;family=Noto+Sans+TC:wght@400;500;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<noscript><style>.icon-btn,#filters,#mailbtn{display:none}.nav-links{display:flex;position:static;border:0;padding:0;flex-direction:row;flex-wrap:wrap}.nav-in{flex-wrap:wrap}</style></noscript>
 </head>
 <body data-page="projects">
+<a class="skip-link" href="#main-content" data-en="Skip to content" data-zh="跳至主要內容">跳至主要內容</a>
 <div class="bg-fx"></div>
-<div class="progress" id="progress"></div>
+<div class="progress" id="progress" style="width: 0%;"></div>
 
-<div id="site-nav"></div>
+<div id="site-nav"><nav class="nav"><div class="nav-in"><a href="index.html" class="logo" aria-label="Henry Yu home"><span class="mk">H</span>Henry Yu</a><div class="nav-right"><div class="nav-links" id="nav-links"><a href="index.html" data-en="Home" data-zh="首頁">首頁</a><a href="about.html" data-en="About" data-zh="關於">關於</a><a href="projects.html" class="active" aria-current="page" data-en="Projects" data-zh="專案">專案</a><a href="index.html#contact" data-en="Contact" data-zh="聯絡">聯絡</a></div><button type="button" class="icon-btn" id="lang" aria-label="切換語言 / language" title="Switch to English">EN</button><button type="button" class="icon-btn" id="theme" aria-label="切換主題 / theme" title="亮/暗" aria-pressed="false">◐</button><button type="button" class="icon-btn burger" id="burger" aria-controls="nav-links" aria-label="選單 / menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div></div></nav></div>
+<main id="main-content">
 
 <section class="wrap page-head">
-  <span class="eyebrow" data-en="Projects" data-zh="專案作品">Projects</span>
-  <h1 data-en="Projects" data-zh="專案作品">Projects</h1>
-  <p data-en="From real-time vision systems to automation side projects — things I've built and am happy to talk about. Filter by tag." data-zh="從即時影像系統到自動化的小專案，這裡收錄了我做過、也願意拿出來說的東西。用標籤篩選看看。">From real-time vision systems to automation side projects — things I've built and am happy to talk about. Filter by tag.</p>
+
+  <h1 data-en="Projects" data-zh="專案作品">專案作品</h1>
+  <p data-en="Vision systems, industry collaborations, and automation tools. Filter by specialty." data-zh="電腦視覺、產學合作與自動化工具，依技術領域探索。">電腦視覺、產學合作與自動化工具，依技術領域探索。</p>
 </section>
 
-<section class="wrap" style="padding:34px 26px 90px">
-  <div class="filters" id="filters" data-reveal></div>
-  <div id="all-projects" data-reveal></div>
+<section class="wrap section-space">
+  <div class="filters in" id="filters" data-reveal=""><button type="button" class="fchip on" data-f="*" aria-pressed="true">全部</button><button type="button" class="fchip" aria-pressed="false" data-f="Multimodal AI">多模態 AI</button><button type="button" class="fchip" aria-pressed="false" data-f="Computer Vision">電腦視覺</button><button type="button" class="fchip" aria-pressed="false" data-f="Voice">語音互動</button><button type="button" class="fchip" aria-pressed="false" data-f="Edge AI">邊緣運算 AI</button><button type="button" class="fchip" aria-pressed="false" data-f="Industry collaboration">產學合作</button><button type="button" class="fchip" aria-pressed="false" data-f="Smart manufacturing">智慧製造</button><button type="button" class="fchip" aria-pressed="false" data-f="Barcode recognition">條碼辨識</button><button type="button" class="fchip" aria-pressed="false" data-f="Automation">自動化</button><button type="button" class="fchip" aria-pressed="false" data-f="Web scraping">網頁爬蟲</button><button type="button" class="fchip" aria-pressed="false" data-f="Python">Python</button><button type="button" class="fchip" aria-pressed="false" data-f="Side project">個人專案</button></div>
+  <div id="all-projects" data-reveal=""><div class="proj-grid"><a class="pcard spot" href="project.html?id=itri-smart-kiosk" data-tags="Multimodal AI|Computer Vision|Voice|Edge AI|Industry collaboration"><div class="pcover has-img" style="background-image:url('assets/img/itri-smart-kiosk.png');background-position:center top"></div><div class="pbody"><div class="ptop"><h2>互動式智慧服務機台</h2><span class="year">2025</span></div><p>與工研院合作，整合影像、語音與多模態 AI，打造不用動手的服務機台。</p><div class="ptags"><span>多模態 AI</span><span>電腦視覺</span><span>語音互動</span><span>邊緣運算 AI</span><span>產學合作</span></div><span class="plink">查看專案</span></div></a><a class="pcard spot" href="project.html?id=smart-sop" data-tags="Computer Vision|Edge AI|Smart manufacturing|Industry collaboration"><div class="pcover has-img" style="background-image:url('assets/img/smart-sop.png');background-position:center top"></div><div class="pbody"><div class="ptop"><h2>智慧 SOP 監控系統</h2><span class="year">2025</span></div><p>獨立開發現場視覺系統，即時追蹤作業步驟、檢查 SOP。</p><div class="ptags"><span>電腦視覺</span><span>邊緣運算 AI</span><span>智慧製造</span><span>產學合作</span></div><span class="plink">查看專案</span></div></a><a class="pcard spot" href="project.html?id=label-inspection" data-tags="Computer Vision|Barcode recognition|Smart manufacturing|Industry collaboration"><div class="pcover has-img" style="background-image:url('assets/img/label-inspection.png')"></div><div class="pbody"><div class="ptop"><h2>標籤辨識檢測</h2><span class="year">2024</span></div><p>從標籤定位、條碼解碼到 OCR 備援，獨立完成檢測系統。</p><div class="ptags"><span>電腦視覺</span><span>條碼辨識</span><span>智慧製造</span><span>產學合作</span></div><span class="plink">查看專案</span></div></a><a class="pcard spot" href="project.html?id=course-grabber" data-tags="Automation|Web scraping|Python|Side project"><div class="pcover has-img" style="background-image:url('assets/img/course-grabber.png')"></div><div class="pbody"><div class="ptop"><h2>選課搶課程式</h2><span class="year">2020 ,  2026</span></div><p>從大一的一天開發，到持續維護、讓同學也能使用的選課工具。</p><div class="ptags"><span>自動化</span><span>網頁爬蟲</span><span>Python</span><span>個人專案</span></div><span class="plink">查看專案</span></div></a></div></div>
 </section>
 
-<div id="site-foot"></div>
+</main>
+<div id="site-foot"><footer class="site-foot"><div class="wrap foot-in"><a href="index.html" class="logo" aria-label="Henry Yu home"><span class="mk">H</span>Henry Yu</a><div class="socials"><a href="https://github.com/yuyan2123" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a><a href="https://www.linkedin.com/in/yuyan2123/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a><a href="mailto:yanheng0803@gmail.com" title="Email" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg></a></div><span>© 2026 Henry / 電腦視覺 / 邊緣 AI</span></div></footer></div>
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
-</body>
-</html>
+
+
+</body></html>

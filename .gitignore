@@ -4,3 +4,6 @@ CLAUDE.md
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# Local design records, screenshots, and verification artifacts
+.hallmark/

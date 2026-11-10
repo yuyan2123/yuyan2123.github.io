@@ -1,142 +1,114 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
+<!DOCTYPE html><html lang="zh-Hant" data-theme="light"><head>
 <meta charset="UTF-8">
+<script>
+(function () {
+  var root = document.documentElement;
+  var theme = root.getAttribute("data-theme") || "light";
+  var language = "zh";
+  try {
+    var saved = localStorage.getItem("pf-theme");
+    if (saved === "dark" || saved === "light") theme = saved;
+    var savedLanguage = localStorage.getItem("pf-lang");
+    if (savedLanguage === "en" || savedLanguage === "zh") language = savedLanguage;
+  } catch (_) {}
+  root.setAttribute("data-theme", theme);
+  root.style.colorScheme = theme;
+  var markupLanguage = root.lang === "en" ? "en" : "zh";
+  if (markupLanguage !== language) root.setAttribute("data-language-pending", "");
+  root.lang = language === "en" ? "en" : "zh-Hant";
+})();
+</script>
+<style id="theme-paint">
+:root { --color-paper: oklch(98.5% 0.005 260); }
+html[data-theme="dark"] { --color-paper: oklch(17% .014 260); }
+html { background: var(--color-paper); }
+/* Only show a restored language after its text and dynamic content agree. */
+html[data-language-pending] body { visibility: hidden; }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry — Software Engineer Portfolio</title>
+<meta name="description" content="Henry Yu 的個人履歷與專案作品。專注電腦視覺、Edge AI、醫療影像研究與智慧製造。">
+<title>Henry Yu | Computer Vision &amp; Edge AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&amp;family=Barlow:wght@400;500&amp;family=Noto+Sans+TC:wght@400;500;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<noscript><style>.icon-btn,#filters,#mailbtn{display:none}.nav-links{display:flex;position:static;border:0;padding:0;flex-direction:row;flex-wrap:wrap}.nav-in{flex-wrap:wrap}</style></noscript>
 </head>
 <body data-page="home">
+<a class="skip-link" href="#main-content" data-en="Skip to content" data-zh="跳至主要內容">跳至主要內容</a>
 <div class="bg-fx"></div>
-<div class="progress" id="progress"></div>
+<div class="progress" id="progress" style="width: 0%;"></div>
 
-<div id="site-nav"></div>
+<div id="site-nav"><nav class="nav"><div class="nav-in"><a href="index.html" class="logo" aria-label="Henry Yu home"><span class="mk">H</span>Henry Yu</a><div class="nav-right"><div class="nav-links" id="nav-links"><a href="index.html" class="active" aria-current="page" data-en="Home" data-zh="首頁">首頁</a><a href="about.html" data-en="About" data-zh="關於">關於</a><a href="projects.html" data-en="Projects" data-zh="專案">專案</a><a href="index.html#contact" data-en="Contact" data-zh="聯絡">聯絡</a></div><button type="button" class="icon-btn" id="lang" aria-label="切換語言 / language" title="Switch to English">EN</button><button type="button" class="icon-btn" id="theme" aria-label="切換主題 / theme" title="亮/暗" aria-pressed="false">◐</button><button type="button" class="icon-btn burger" id="burger" aria-controls="nav-links" aria-label="選單 / menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div></div></nav></div>
+<main id="main-content">
 
 <!-- ===== HERO（CV 框景雜誌版） ===== -->
 <header class="hero" id="home">
   <div class="wrap">
-    <div class="hero-frame" data-reveal>
-      <!-- 左側直書資訊軌 -->
-      <div class="hero-rail" aria-hidden="true">
-        <span class="rail-top">Portfolio — 2026</span>
-        <div class="rail-bot">
-          <span class="rail-scroll">Scroll</span>
-          <span class="rail-arrow">↓</span>
-        </div>
-      </div>
-      <!-- 文字欄 -->
+    <div class="hero-frame">
       <div class="hero-main">
-        <span class="hero-num" aria-hidden="true">01</span>
-        <span class="status"><span class="pulse"></span><span data-bind="status">Open to work</span></span>
-        <h1><span data-en="Hi, I'm" data-zh="嗨！我是">Hi, I'm</span><br><span class="grad" data-bind="name">Henry</span></h1>
-        <p class="role" data-bind="role">Computer Vision / Edge AI Engineer</p>
-        <p class="tag" data-bind="tagline">I build vision systems that make sense of what a camera sees — detecting, recognizing, and reading meaning out of images.</p>
+        <h1 aria-label="Henry Yu"><span>Henry</span><span>Yu.</span></h1>
+        <p class="tag" data-en="Computer vision and Edge AI, built for the real world." data-zh="專注電腦視覺與邊緣 AI，讓研究走進真實場景。">專注電腦視覺與邊緣 AI，讓研究走進真實場景。</p>
         <div class="hero-btns">
-          <a href="projects.html" class="btn btn-primary" data-en="View my work" data-zh="看我的專案">View my work</a>
-          <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV ↓" data-zh="下載履歷 ↓">Download CV ↓</a>
+          <a href="projects.html" class="btn btn-primary" data-en="Explore my work" data-zh="探索專案作品">探索專案作品</a>
+          <a href="#" class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener" data-en="Download CV" data-zh="下載履歷" aria-disabled="true" title="履歷 PDF 尚未提供，請先聯絡我">下載履歷</a>
         </div>
-        <div class="hero-foot">
-          <div class="socials">
-            <a href="#" data-href="github" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-            <a href="#" data-href="linkedin" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#contact" title="Email" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-          </div>
-          <span class="hero-mail" data-bind="email">hello@henry.dev</span>
-        </div>
+        <p class="resume-note" id="resume-status" aria-live="polite"></p>
       </div>
-      <!-- 右側全出血框景肖像 -->
-      <div class="hero-photo">
-        <img class="hero-portrait" src="assets/img/me.png" alt="Henry">
-        <span class="photo-blend" aria-hidden="true"></span>
-        <span class="photo-edge" aria-hidden="true"></span>
-        <span class="photo-grid" aria-hidden="true"></span>
-        <span class="photo-frame" aria-hidden="true"></span>
-        <span class="photo-scrim" aria-hidden="true"></span>
-        <span class="photo-tag">Subject — H.Yu</span>
-        <span class="photo-cap">
-          <span data-en="M.S. · Info Management" data-zh="資訊管理碩士">M.S. · Info Management</span>
-          <span class="photo-loc" data-bind="location">Kaohsiung, TW</span>
-        </span>
-      </div>
+      <figure class="hero-photo">
+        <img class="hero-portrait" src="assets/img/me.png" width="1536" height="1024" alt="Henry Yu in his graduation gown" fetchpriority="high">
+        <figcaption class="photo-cap"><span data-en="M.S. student, Information Management" data-zh="資訊管理碩士生">資訊管理碩士生</span><span data-bind="location">高雄 / 臺灣</span></figcaption>
+      </figure>
+    </div>
+    <div class="hero-index">
+      <span class="hero-role" data-bind="role">電腦視覺 / 邊緣 AI 工程師</span>
+      <span class="status" data-bind="status">開放接案中</span>
+      <a href="https://github.com/yuyan2123" data-href="github" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/yuyan2123/" data-href="linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#contact" data-en="Get in touch" data-zh="與我聯絡">與我聯絡</a>
     </div>
   </div>
 </header>
 
-<!-- ===== ABOUT 摘要 ===== -->
-<section class="wrap" id="about-teaser" style="padding-top:86px;padding-bottom:86px">
-  <div class="sec-editorial" data-reveal>
-    <h2 data-en="A bit about me" data-zh="關於我">A bit about me</h2>
-    <p data-en="More than models and metrics — I care whether it actually helps the person using it." data-zh="不只是模型與數字，更在意它是不是真的幫得上使用它的人。">More than models and metrics — I care whether it actually helps the person using it.</p>
-  </div>
-  <div class="bento">
-    <article class="cell c-bio" data-reveal>
-      <span class="en" data-en="Biography" data-zh="自傳">Biography</span>
-      <p class="big" data-en="I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing." data-zh="我是一名來自高雄的資訊管理碩士生，主要做電腦視覺與影像處理，把它們用在真實的問題上——從醫療到智慧製造。">I'm a master's student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems — from healthcare to smart manufacturing.</p>
-      <p data-en="My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab." data-zh="我的碩士論文是用攝影機協助醫師客觀評估巴金森氏症，同時也接下智慧製造的產學合作計畫。比起把程式寫得多聰明，我更在意一件東西離開實驗室後，能不能穩定地在現實裡運作。">My thesis builds a camera-based tool that helps doctors objectively assess Parkinson's disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab.</p>
-      <div class="more"><a class="btn btn-ghost" href="about.html" data-en="Read full bio" data-zh="完整自我介紹">Read full bio</a></div>
-    </article>
-    <article class="cell c-side" data-reveal>
-      <span class="en" data-en="Currently" data-zh="近況">Currently</span>
-      <h3 data-en="What I'm doing" data-zh="正在做的事">What I'm doing</h3>
+<section class="wrap section-space" id="about-teaser">
+<div class="section-heading"><h2 data-en="Research meets reality" data-zh="把研究，帶進現場。">把研究，帶進現場。</h2><a href="about.html" data-en="Read my story" data-zh="閱讀完整經歷">閱讀完整經歷</a></div>
+<div class="profile-layout"><article class="profile-copy">
+
+      <p class="big" data-en="I’m a master’s student in Information Management based in Kaohsiung, working on computer vision and image processing for real-world problems, from healthcare to smart manufacturing." data-zh="我是一名來自高雄的資訊管理碩士生，主要做電腦視覺與影像處理，把它們用在真實的問題上，從醫療到智慧製造。">我是一名來自高雄的資訊管理碩士生，主要做電腦視覺與影像處理，把它們用在真實的問題上，從醫療到智慧製造。</p>
+      <p data-en="My thesis builds a camera-based tool that helps doctors objectively assess Parkinson’s disease, and alongside it I run industry-academia projects in smart manufacturing. I care less about clever code and more about whether something holds up reliably once it leaves the lab." data-zh="我的碩士論文是用攝影機協助醫師客觀評估巴金森氏症，同時也接下智慧製造的產學合作計畫。比起把程式寫得多聰明，我更在意一件東西離開實驗室後，能不能穩定地在現實裡運作。">我的碩士論文是用攝影機協助醫師客觀評估巴金森氏症，同時也接下智慧製造的產學合作計畫。比起把程式寫得多聰明，我更在意一件東西離開實驗室後，能不能穩定地在現實裡運作。</p>
+      <div class="more"><a class="btn btn-ghost" href="about.html" data-en="Read full bio" data-zh="完整自我介紹">完整自我介紹</a></div>
+    </article><div class="profile-facts" id="stats"><article class="cell c-stat" data-reveal=""><span class="num">9+</span><span class="k">年開發經驗</span></article><article class="cell c-stat" data-reveal=""><span class="num">4</span><span class="k">產學合作計畫</span></article><article class="cell c-stat" data-reveal=""><span class="num">8th</span><span class="k">全國高級中等學校商業類學生技藝競賽 <span style="white-space:nowrap">金手獎</span></span></article></div></div>
+<aside class="current-note">
+
+      <h3 data-en="What I’m doing" data-zh="正在做的事">正在做的事</h3>
       <ul>
-        <li><span class="mn">›</span> <span data-en="Finishing my thesis on camera-based Parkinson's assessment" data-zh="完成以攝影機評估巴金森氏症的碩士論文">Finishing my thesis on camera-based Parkinson's assessment</span></li>
-        <li><span class="mn">›</span> <span data-en="Running industry projects in vision and smart manufacturing" data-zh="執行影像處理與智慧製造的產學計畫">Running industry projects in vision and smart manufacturing</span></li>
-        <li><span class="mn">›</span> <span data-en="Turning my research into a tool patients can use at home" data-zh="把研究做成病患在家就能使用的工具">Turning my research into a tool patients can use at home</span></li>
+        <li><span class="mn">›</span> <span data-en="Finishing my thesis on camera-based Parkinson’s assessment" data-zh="完成以攝影機評估巴金森氏症的碩士論文">完成以攝影機評估巴金森氏症的碩士論文</span></li>
+        <li><span class="mn">›</span> <span data-en="Running industry projects in vision and smart manufacturing" data-zh="執行影像處理與智慧製造的產學計畫">執行影像處理與智慧製造的產學計畫</span></li>
+        <li><span class="mn">›</span> <span data-en="Turning my research into a tool patients can use at home" data-zh="把研究做成病患在家就能使用的工具">把研究做成病患在家就能使用的工具</span></li>
       </ul>
-    </article>
-    <div id="stats" style="display:contents"></div>
-  </div>
+    </aside>
 </section>
-
-<!-- ===== SKILLS ===== -->
-<section class="wrap" id="skills-sec" style="padding:0 26px 86px">
-  <div class="sec-quiet" data-reveal>
-    <h2 data-en="Tech stack" data-zh="技術棧">Tech stack</h2>
-    <p data-en="Grouped by area — bold marks core skills, the rest I'm comfortable ramping up on." data-zh="依領域分組，粗體代表核心技能，其餘則是熟悉並能快速上手的部分。">Grouped by area — bold marks core skills, the rest I'm comfortable ramping up on.</p>
-  </div>
-  <div class="skill-bento" id="skills" data-reveal></div>
-  <div class="skill-note">
-    <span><span class="dotc"></span><span data-en="Core — daily driver, can own end-to-end" data-zh="核心：日常主力、能獨立負責">Core — daily driver, can own end-to-end</span></span>
-    <span><span class="doto"></span><span data-en="Familiar — used it, ramp up fast" data-zh="熟悉：用過、能快速上手">Familiar — used it, ramp up fast</span></span>
-  </div>
+<section class="skills-band" id="skills-sec"><div class="wrap">
+<div class="section-heading"><h2 data-en="Tools I work with" data-zh="從模型，到實作。">從模型，到實作。</h2></div>
+<div class="skill-bento" id="skills"><article class="scard"><h3>AI 與電腦視覺</h3><div class="pills"><span class="pill core">Python</span><span class="pill core">Computer Vision</span><span class="pill core">OpenCV</span><span class="pill">OCR</span><span class="pill">LLM</span><span class="pill">VLM</span><span class="pill">Multimodal AI</span></div></article><article class="scard"><h3>邊緣與自動化</h3><div class="pills"><span class="pill core">Jetson Orin Nano</span><span class="pill core">Edge AI</span><span class="pill core">Linux</span><span class="pill">Selenium</span><span class="pill">Playwright</span><span class="pill">Web scraping</span></div></article><article class="scard"><h3>介面與網頁</h3><div class="pills"><span class="pill core">Tkinter</span><span class="pill core">JavaScript</span><span class="pill core"><abbr title="HyperText Markup Language and Cascading Style Sheets">HTML / CSS</abbr></span><span class="pill">Git</span><span class="pill">RWD</span></div></article></div>
+<p class="skill-note" data-en="Underlined skills are my core tools. The rest are tools I have used and can build on." data-zh="底線標示日常主力、能獨立負責的核心技能；其餘為熟悉、能快速上手的工具。">底線標示日常主力、能獨立負責的核心技能；其餘為熟悉、能快速上手的工具。</p>
+</div></section>
+<section class="wrap work-section" id="work">
+<div class="section-heading"><h2 data-en="Work in the real world" data-zh="在真實場景裡運作。">在真實場景裡運作。</h2><a href="projects.html" data-en="View all projects" data-zh="查看全部專案">查看全部專案</a></div>
+<div id="featured-grid"><a class="featured spot" href="project.html?id=itri-smart-kiosk"><div class="cover has-img" style="background-image:url('assets/img/itri-smart-kiosk.png');background-position:center top"></div><div class="body"><span class="ribbon">精選專案</span><h3>互動式智慧服務機台</h3><p>與工研院合作，整合影像、語音與多模態 AI，打造不用動手的服務機台。</p><div class="ptags"><span>多模態 AI</span><span>電腦視覺</span><span>語音互動</span><span>邊緣運算 AI</span><span>產學合作</span></div><span class="plink">看完整介紹</span></div></a><div class="proj-grid"><a class="pcard spot" href="project.html?id=smart-sop" data-tags="Computer Vision|Edge AI|Smart manufacturing|Industry collaboration"><div class="pcover has-img" style="background-image:url('assets/img/smart-sop.png');background-position:center top"></div><div class="pbody"><div class="ptop"><h3>智慧 SOP 監控系統</h3><span class="year">2025</span></div><p>獨立開發現場視覺系統，即時追蹤作業步驟、檢查 SOP。</p><div class="ptags"><span>電腦視覺</span><span>邊緣運算 AI</span><span>智慧製造</span><span>產學合作</span></div><span class="plink">查看專案</span></div></a><a class="pcard spot" href="project.html?id=label-inspection" data-tags="Computer Vision|Barcode recognition|Smart manufacturing|Industry collaboration"><div class="pcover has-img" style="background-image:url('assets/img/label-inspection.png')"></div><div class="pbody"><div class="ptop"><h3>標籤辨識檢測</h3><span class="year">2024</span></div><p>從標籤定位、條碼解碼到 OCR 備援，獨立完成檢測系統。</p><div class="ptags"><span>電腦視覺</span><span>條碼辨識</span><span>智慧製造</span><span>產學合作</span></div><span class="plink">查看專案</span></div></a><a class="pcard spot" href="project.html?id=course-grabber" data-tags="Automation|Web scraping|Python|Side project"><div class="pcover has-img" style="background-image:url('assets/img/course-grabber.png')"></div><div class="pbody"><div class="ptop"><h3>選課搶課程式</h3><span class="year">2020 ,  2026</span></div><p>從大一的一天開發，到持續維護、讓同學也能使用的選課工具。</p><div class="ptags"><span>自動化</span><span>網頁爬蟲</span><span>Python</span><span>個人專案</span></div><span class="plink">查看專案</span></div></a></div></div>
 </section>
-
-<!-- ===== 精選專案 ===== -->
-<section class="wrap" id="work" style="padding:0 26px 60px">
-  <div class="sec-split" data-reveal>
-    <span class="lbl" data-en="Selected work" data-zh="精選專案">Selected work</span>
-    <div>
-      <h2 data-en="Featured projects" data-zh="精選專案">Featured projects</h2>
-      <p data-en="A few of my most representative projects — click through for the full case." data-zh="挑了幾個最有代表性的作品，點進去看完整介紹。">A few of my most representative projects — click through for the full case.</p>
-    </div>
-  </div>
-  <div id="featured-grid" data-reveal></div>
-  <div style="margin-top:26px"><a class="btn btn-ghost" href="projects.html" data-en="View all projects" data-zh="查看全部專案">View all projects</a></div>
-</section>
-
-<!-- ===== 聯絡 ===== -->
-<section class="contact" id="contact">
-  <div class="wrap" data-reveal>
-    <div class="inner">
-      <p class="kicker" data-en="Get in touch" data-zh="聯絡我">Get in touch</p>
-      <h2><span data-en="Let's build something" data-zh="一起做點">Let's build something</span> <span class="grad" data-en="great" data-zh="有趣的事">great</span><span data-en="" data-zh="吧"></span></h2>
-      <p data-en="Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you." data-zh="不論是工作機會、專案合作，或只是想聊聊技術，都歡迎找我。">Whether it's a role, a collaboration, or just a chat about tech — I'd love to hear from you.</p>
-      <div class="cbtns">
-        <a class="btn btn-primary" id="mailbtn" href="#" data-href="email" data-en="Copy email" data-zh="複製 Email">Copy email</a>
-        <a class="btn btn-ghost" href="#" data-href="github" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="btn btn-ghost" href="#" data-href="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
-      </div>
-      <p class="copy" id="copyhint" data-bind="email">hello@henry.dev</p>
-    </div>
-  </div>
-</section>
-
-<div id="site-foot"></div>
+<section class="contact" id="contact"><div class="wrap"><div class="inner">
+<h2 data-en="Let’s talk." data-zh="下一步，聊聊吧。">下一步，聊聊吧。</h2>
+<div class="contact-body"><p data-en="For roles, collaborations, or a conversation about computer vision." data-zh="工作機會、專案合作，或聊聊電腦視覺，都歡迎找我。">工作機會、專案合作，或聊聊電腦視覺，都歡迎找我。</p>
+<div class="cbtns"><a class="btn btn-primary" id="mailbtn" href="mailto:yanheng0803@gmail.com" data-href="email" data-en="Copy email" data-zh="複製 Email">複製 Email</a><a href="https://github.com/yuyan2123" data-href="github" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/yuyan2123/" data-href="linkedin" target="_blank" rel="noopener">LinkedIn</a></div>
+<p class="copy" id="copyhint" data-bind="email" aria-live="polite">yanheng0803@gmail.com</p></div>
+</div></div></section>
+</main>
+<div id="site-foot"><footer class="site-foot"><div class="wrap foot-in"><a href="index.html" class="logo" aria-label="Henry Yu home"><span class="mk">H</span>Henry Yu</a><div class="socials"><a href="https://github.com/yuyan2123" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a><a href="https://www.linkedin.com/in/yuyan2123/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a><a href="mailto:yanheng0803@gmail.com" title="Email" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg></a></div><span>© 2026 Henry / 電腦視覺 / 邊緣 AI</span></div></footer></div>
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
-</body>
-</html>
+
+
+</body></html>
