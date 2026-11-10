@@ -283,18 +283,19 @@
     var root = document.documentElement, key = "pf-theme";
     // The head bootstrap applies the saved theme before styles and first paint.
     var themeBtn = $("#theme");
+    var themeMedia = window.matchMedia && matchMedia("(prefers-color-scheme: dark)");
+    var followsSystem = root.getAttribute("data-theme-source") !== "user";
     var requestedTheme = root.getAttribute("data-theme");
     var themeTransition = null, themeTimer = 0;
     if (themeBtn) themeBtn.setAttribute("aria-pressed", root.getAttribute("data-theme") === "dark" ? "true" : "false");
-    if (themeBtn) themeBtn.addEventListener("click", function () {
-      var next = requestedTheme === "dark" ? "light" : "dark";
+    function changeTheme(next, persist) {
       requestedTheme = next;
       var applyTheme = function () {
         if (next !== requestedTheme) return;
         root.setAttribute("data-theme", next);
         root.style.colorScheme = next;
-        savePreference(key, next);
-        themeBtn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+        if (persist) savePreference(key, next);
+        if (themeBtn) themeBtn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
       };
       var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (themeTransition) themeTransition.skipTransition();
@@ -316,7 +317,21 @@
         clearTimeout(themeTimer);
         themeTimer = setTimeout(function () { root.classList.remove("theme-switching"); }, 500);
       }
+    }
+    if (themeBtn) themeBtn.addEventListener("click", function () {
+      followsSystem = false;
+      root.setAttribute("data-theme-source", "user");
+      changeTheme(requestedTheme === "dark" ? "light" : "dark", true);
     });
+    if (themeMedia) {
+      var onSystemThemeChange = function (event) {
+        if (followsSystem) changeTheme(event.matches ? "dark" : "light", false);
+      };
+      if (themeMedia.addEventListener) themeMedia.addEventListener("change", onSystemThemeChange);
+      else if (themeMedia.addListener) themeMedia.addListener(onSystemThemeChange);
+      var systemTheme = themeMedia.matches ? "dark" : "light";
+      if (followsSystem && requestedTheme !== systemTheme) changeTheme(systemTheme, false);
+    }
     var langBtn = $("#lang");
     if (langBtn) langBtn.addEventListener("click", function () { setLang(lang === "en" ? "zh" : "en"); });
     var burger = $("#burger"), nl = $(".nav-links");

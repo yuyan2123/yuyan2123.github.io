@@ -3,15 +3,20 @@
 <script>
 (function () {
   var root = document.documentElement;
-  var theme = root.getAttribute("data-theme") || "light";
+  var theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  var themeSource = "system";
   var language = "zh";
   try {
     var saved = localStorage.getItem("pf-theme");
-    if (saved === "dark" || saved === "light") theme = saved;
+    if (saved === "dark" || saved === "light") {
+      theme = saved;
+      themeSource = "user";
+    }
     var savedLanguage = localStorage.getItem("pf-lang");
     if (savedLanguage === "en" || savedLanguage === "zh") language = savedLanguage;
   } catch (_) {}
   root.setAttribute("data-theme", theme);
+  root.setAttribute("data-theme-source", themeSource);
   root.style.colorScheme = theme;
   var markupLanguage = root.lang === "en" ? "en" : "zh";
   if (markupLanguage !== language) root.setAttribute("data-language-pending", "");
