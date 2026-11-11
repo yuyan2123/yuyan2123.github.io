@@ -105,9 +105,9 @@
   function tagsHtml(p) { return (p.tags || []).map(function (tg) { return "<span>" + t(tg) + "</span>"; }).join(""); }
 
   var synopses = {
-    "itri-smart-kiosk": { en: "An ITRI collaboration connecting vision, voice and multimodal AI in a hands-free kiosk.", zh: "與工研院合作，整合影像辨識、語音互動與多模態 AI，讓使用者直接透過語音操作服務機台。" },
-    "smart-sop": { en: "An on-site vision system that checks manufacturing steps in real time.", zh: "獨立開發產線影像辨識系統，即時檢查作業步驟是否符合 SOP。" },
-    "label-inspection": { en: "Label detection, barcode decoding and OCR, built end to end.", zh: "獨立開發標籤定位與條碼辨識功能，沒有條碼時則改用 OCR 擷取文字。" },
+    "itri-smart-kiosk": { en: "Completed an ITRI collaboration integrating vision, voice and multimodal AI in a hands-free kiosk.", zh: "與工研院合作完成智慧服務機台，整合影像辨識、語音互動與多模態 AI，支援使用者直接以語音操作。" },
+    "smart-sop": { en: "A completed industry project: an on-site vision system that checks manufacturing steps in real time.", zh: "已完成的產學合作專案，由我獨立開發影像辨識系統，即時檢查產線作業是否符合 SOP。" },
+    "label-inspection": { en: "Completed end-to-end development of label detection, barcode decoding and OCR for an industry partner.", zh: "已完成的產學合作專案，由我獨立開發標籤定位與條碼辨識功能，並以 OCR 處理純文字標籤。" },
     "course-grabber": { en: "A course-registration tool built as a freshman and maintained for classmates.", zh: "大一時開發的自動選課工具，後續持續改版，並提供同學使用。" }
   };
   function synopsis(p) { return t(synopses[p.id] || p.summary); }
