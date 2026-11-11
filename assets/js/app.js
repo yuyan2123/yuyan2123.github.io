@@ -14,7 +14,7 @@
   function savePreference(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
   var LANG_KEY = "pf-lang";
   var lang = document.documentElement.lang === "en" ? "en" : "zh"; // Restored by the head bootstrap before first paint.
-  function cleanText(v) { return String(v).replace(/[—–]+/g, ", ").replace(/(20\d\d),\s*(20\d\d)/g, lang === "zh" ? "$1 至 $2" : "$1 to $2"); }
+  function cleanText(v) { return String(v).replace(/(20\d\d)\s*(?:[,—–]|to|至)\s*(20\d\d)/g, lang === "zh" ? "$1 至 $2" : "$1 to $2").replace(/[—–]+/g, ", "); }
   function t(v) {
     if (v && typeof v === "object" && !Array.isArray(v) && ("en" in v || "zh" in v))
       return cleanText(v[lang] != null ? v[lang] : (v.en != null ? v.en : v.zh)).replace(/ · /g, " / ").replace(/ ● /g, " / ");
@@ -29,10 +29,10 @@
           notFound:"Project not found", notFoundLink:"project list",
           notFoundPre:"Please pick one from the ", notFoundPost:".",
           builtBy:"Computer Vision / Edge AI", copied:"Copied ✓", sep:", " },
-    zh: { view:"查看專案", featured:"精選專案", seeFull:"看完整介紹",
+    zh: { view:"查看專案", featured:"精選專案", seeFull:"查看專案",
           back:"返回專案列表", prev:"上一個專案", next:"下一個專案",
-          year:"年份", role:"角色", stack:"技術", tags:"標籤", details:"詳情",
-          repo:"原始碼", demo:"線上版本", article:"技術文章", all:"全部",
+          year:"專案年份", role:"參與方式", stack:"使用技術", tags:"專案分類", details:"專案資訊",
+          repo:"原始碼", demo:"線上展示", article:"技術文章", all:"全部",
           notFound:"找不到這個專案", notFoundLink:"專案列表",
           notFoundPre:"請回到 ", notFoundPost:" 重新選擇。",
           builtBy:"電腦視覺 / 邊緣 AI", copied:"已複製 ✓", sep:"、" },
@@ -46,9 +46,9 @@
     var active = page === "project" ? "projects" : page;
     var links = [
       { p: "home", href: "index.html", en: "Home", zh: "首頁" },
-      { p: "about", href: "about.html", en: "About", zh: "關於" },
+      { p: "about", href: "about.html", en: "About", zh: "關於我" },
       { p: "projects", href: "projects.html", en: "Projects", zh: "專案" },
-      { p: "contact", href: "index.html#contact", en: "Contact", zh: "聯絡" },
+      { p: "contact", href: "index.html#contact", en: "Contact", zh: "聯絡我" },
     ];
     host.innerHTML =
       '<nav class="nav"><div class="nav-in">' +
@@ -105,10 +105,10 @@
   function tagsHtml(p) { return (p.tags || []).map(function (tg) { return "<span>" + t(tg) + "</span>"; }).join(""); }
 
   var synopses = {
-    "itri-smart-kiosk": { en: "An ITRI collaboration connecting vision, voice and multimodal AI in a hands-free kiosk.", zh: "與工研院合作，整合影像、語音與多模態 AI，打造不用動手的服務機台。" },
-    "smart-sop": { en: "An on-site vision system that checks manufacturing steps in real time.", zh: "獨立開發現場視覺系統，即時追蹤作業步驟、檢查 SOP。" },
-    "label-inspection": { en: "Label detection, barcode decoding and OCR, built end to end.", zh: "從標籤定位、條碼解碼到 OCR 備援，獨立完成檢測系統。" },
-    "course-grabber": { en: "A course-registration tool built as a freshman and maintained for classmates.", zh: "從大一的一天開發，到持續維護、讓同學也能使用的選課工具。" }
+    "itri-smart-kiosk": { en: "An ITRI collaboration connecting vision, voice and multimodal AI in a hands-free kiosk.", zh: "與工研院合作，整合影像辨識、語音互動與多模態 AI，讓使用者直接透過語音操作服務機台。" },
+    "smart-sop": { en: "An on-site vision system that checks manufacturing steps in real time.", zh: "獨立開發產線影像辨識系統，即時檢查作業步驟是否符合 SOP。" },
+    "label-inspection": { en: "Label detection, barcode decoding and OCR, built end to end.", zh: "獨立開發標籤定位與條碼辨識功能，沒有條碼時則改用 OCR 擷取文字。" },
+    "course-grabber": { en: "A course-registration tool built as a freshman and maintained for classmates.", zh: "大一時開發的自動選課工具，後續持續改版，並提供同學使用。" }
   };
   function synopsis(p) { return t(synopses[p.id] || p.summary); }
 
@@ -128,7 +128,9 @@
   function renderStats() {
     var host = $("#stats"); if (!host) return;
     host.innerHTML = (S.stats || []).map(function (s) {
-      return '<article class="cell c-stat" data-reveal><span class="num">' + s.num + (s.suffix || "") + '</span><span class="k">' + t(s.label) + '</span></article>';
+      var chineseRank = lang === "zh" && s.suffix === "th";
+      var number = chineseRank ? "第" + s.num + "名" : s.num + (s.suffix || "");
+      return '<article class="cell c-stat" data-reveal><span class="num' + (chineseRank ? ' rank' : '') + '">' + number + '</span><span class="k">' + t(s.label) + '</span></article>';
     }).join("");
   }
   function renderSkills() {

@@ -73,6 +73,7 @@ li+li{margin-top:var(--space-sm)}
 .profile-facts .c-stat{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:var(--gap-columns);padding-block:var(--space-lg);border-bottom:1px solid var(--color-rule)}
 .c-stat .num{font:800 64px/1 var(--font-display);color:var(--color-signal);font-variant-numeric:tabular-nums}
 .c-stat .k{font-size:16px}
+.c-stat .num.rank{font-size:40px;white-space:nowrap}
 .current-note{margin-top:var(--space-xl);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--gap-columns);padding-top:var(--space-lg);border-top:1px solid var(--color-rule)}
 .current-note h3{font-size:32px}
 .current-note ul{list-style:none;padding:0}
